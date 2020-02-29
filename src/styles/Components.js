@@ -1,5 +1,5 @@
 import Styled, { keyframes } from 'styled-components'
-import Person from '../public/person.jpg'
+// import Person from '../public/person.jpg'
 
 const moveLeft = keyframes`
   from {
@@ -126,13 +126,20 @@ export const ImageStyle = Styled.img`
 `
 
 export const WaveStyle = Styled.div`
-  height: 570px;
+  height: 300px;
   width: 100%;
   position: absolute;
-  bottom: -200px;
+  bottom: 0;
   left: 0;
 `
 // About Section
+export const AboutStyle  = Styled.div`
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  height: 100vh;
+`
+
 export const TwoColumns = Styled.div`
   display: flex;
   align-items: center;
@@ -140,14 +147,26 @@ export const TwoColumns = Styled.div`
   height: 100vh;
   width: 100%;
   div:first-child {
-    background: url(${Person}) no-repeat;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
+    
     height: 100%;
     overflow: hidden;
   }
   div {
     flex: 1;
+  }
+`
+// background: url(${Person}) no-repeat;
+// background-size: cover;
+// background-repeat: no-repeat;
+// background-position: 50% 50%;
+
+// Projects section
+export const ProjectsStyle = Styled.div`
+  background-color: #41607B;
+  text-align: center;
+  min-height: 100vh;
+  h1 {
+    color: white;
+    padding: 30px 0;
   }
 `

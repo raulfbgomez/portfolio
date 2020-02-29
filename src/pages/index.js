@@ -4,7 +4,7 @@ import React from 'react'
 import Layout from '../components/Layout'
 import Header from '../components/Header'
 import About from '../components/About'
-import Portfolio from '../components/Portfolio'
+import Projects from '../components/Projects'
 import Experience from '../components/Experience'
 
 const Home = (props) => {
@@ -14,7 +14,7 @@ const Home = (props) => {
       <Layout title="Raul Bautista Gomez | Portafolio">
         <Header />
         <About />
-        <Portfolio />
+        <Projects />
         <Experience />
         <p>Redes sociales aqui</p>
         <div>
