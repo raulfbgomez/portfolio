@@ -23,7 +23,7 @@ export const CardContent = Styled.div`
     margin: 0;
   }
   p {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   p.tech {
     color: ${props => props.theme.colors.primary};
@@ -83,6 +83,6 @@ export const CardWrapper = Styled.div`
 
 export const Container = Styled.section`
   background-color: #e7eef7;
-  height: 90vh;
+  min-height: 90vh;
   padding: 40px 0;
 `
