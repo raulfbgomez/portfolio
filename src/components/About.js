@@ -1,10 +1,16 @@
-import { AboutStyle } from '../styles/Components'
+import { Title, Hr } from '../styles/Components'
+import { AboutStyle, Card } from '../styles/About'
 
 const About = () => (
   <AboutStyle>
-    <h1>Sobre mi</h1>
-    <p>De Puebla, ahora en la CDMX en busca de nuevos retos en el desarrollo de Software.</p>
-    <p>Me apasiona el Desarrollo de Aplicaciones pero sobre todo las que tienen que implementar tecnologias web como JavaScript, Python, PHP y Node</p>
+    <Card>
+      <Title>Sobre mi</Title>
+      <Hr />
+      <p>Soy desarrollador de software que se enfoca en tecnologias web, actualmente en la CDMX.</p>
+      <p>Disfruto resolver problemas en el Backend implementado lenguajes de programación como Python, PHP y JavaScript</p>
+      <p>Tambien me agrada diseñar la UI del usuario con base a un boceto y programar esa interacción que el usuario tendra con la aplicación, usando JavaScript Vanilla o algo mas complejo como React.</p>
+      <p>Cuando tengo un tiempo libre disfruto de aprender nuevas tecnologías web como Docker, Next, Gatsby y GCP</p>
+    </Card>
   </AboutStyle>
 )
 

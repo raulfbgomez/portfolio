@@ -19,6 +19,7 @@ const Home = (props) => {
         <p>Redes sociales aqui</p>
         <div>
           <a href="https://www.freepik.es/fotos-vectores-gratis/negocios">Vector de Negocios creado por freepik - www.freepik.es</a>
+          <a href="https://www.freepik.es/fotos-vectores-gratis/viajes">Vector de Viajes creado por freepik - www.freepik.es</a>
         </div>
       </Layout>
     </>

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { MenuStyle } from '../styles/Components'
+import { MenuStyle } from '../styles/Menu'
 
 const Nav = () => (
   <MenuStyle>

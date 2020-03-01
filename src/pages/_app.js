@@ -12,12 +12,14 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: 'Spartan', sans-serif;
+    color: '#566370';
   }
 `
 
 const theme = {
   colors: {
     primary: '#0070f3',
+    secondary: '#67a32b'
   },
 }
 
