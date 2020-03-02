@@ -83,6 +83,8 @@ export const CardWrapper = Styled.div`
 
 export const Container = Styled.section`
   background-color: #e7eef7;
+  -webkit-clip-path: polygon(0 0, 20% 100px, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 20% 100px, 100% 0, 100% 100%, 0 100%);
   min-height: 90vh;
-  padding: 40px 0;
+  padding: 70px 0 40px;
 `

@@ -14,6 +14,13 @@ export const Card = Styled.div`
     font-size: 1.2rem;
     padding-bottom: 1.2rem;
     line-height: 1.9rem;
+    a {
+      color: ${props => props.theme.colors.secondary};
+      text-decoration: none;
+      :hover {
+        color: ${props => props.theme.colors.primary};
+      }
+    }
   }
 `
 
