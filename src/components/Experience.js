@@ -18,7 +18,7 @@ const Experience = () => (
         <h1>Jefe de Departamento, FGR</h1>
         <p>Lidere el desarrolle e implementación del Sistema para la Automatización de la Información de los Procesos Sustantivos (SAPS) de la SEIDF. Dicho sistema se implementó en Ubuntu Server bajo el stack LAMP. Se configuró MySQL para aceptar conexiones remotas, y el server para conectarse via SSH.</p>
         <p>Para la parte del backend se creo un Micro Framework con diversas Bibliotecas de PHP. Para el manejo de rutas se utilizó PHPRoute, como ORM Eloquent, para las vistas Twig, para el envió de emails PHPMailer, para validar la información de los request PHPValidator y Angular 1 para el frontend.</p>
-        <p>Parte de los retos de este sistema fuerón la seguridad y la integridad de la información, además de poder compartir información desde un servidor de archivos montado en Windows Server.</p>
+        <p>Parte de los retos de este sistema fueron la seguridad y la integridad de la información, además de poder compartir información desde un servidor de archivos montado en Windows Server.</p>
       </div>
     </CardExperience>
     <CardExperience>
