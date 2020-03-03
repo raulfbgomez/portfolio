@@ -13,7 +13,7 @@ const Cabecera = () => {
         <TextosStyle>
           <h1>Raul Bautista Gomez</h1>
           <h2>Web Developer</h2>
-          <a href='#'>Cantáctame</a>
+          <a href='#contact'>Cantáctame</a>
         </TextosStyle>
       </ContainerStyle>
       <WaveStyle>

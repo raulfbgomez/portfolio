@@ -8,7 +8,7 @@ export const AboutStyle  = Styled.div`
 
 export const Card = Styled.div`
   margin: 0 auto;
-  width: 60%;
+  width: 70%;
   p {
     color: #555;
     font-size: 1.2rem;
@@ -20,6 +20,12 @@ export const Card = Styled.div`
       :hover {
         color: ${props => props.theme.colors.primary};
       }
+    }
+  }
+  @media only screen and (max-width: 720px) {
+    width: 90%;
+    p {
+      font-size: 1rem;
     }
   }
 `

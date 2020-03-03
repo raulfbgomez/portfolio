@@ -11,6 +11,9 @@ export const Card = Styled.div`
   margin: 20px auto;
   min-height: 220px;
   width: 70%;
+  @media only screen and (max-width: 720px) {
+    width: 95%;
+  }
 `
 
 export const CardContent = Styled.div`
@@ -39,6 +42,11 @@ export const CardImage = Styled.div`
   background-size:100% 100%;
   border-radius: 10px 0 0 10px;
   width: 400px;
+  @media only screen and (max-width: 720px) {
+    border-radius: 10px;
+    height: 200px;
+    width: 100%;
+  }
 `
 
 export const CardLinks = Styled.div`
@@ -79,6 +87,9 @@ export const CardWrapper = Styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  @media only screen and (max-width: 720px) {
+    flex-direction: column;
+  }
 `
 
 export const Container = Styled.section`

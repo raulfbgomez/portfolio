@@ -44,10 +44,6 @@ export const HeaderStyle = Styled.header`
   height: 100vh;
   vertical-align: bottom;
   position: relative;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
 `
 
 export const ContainerStyle = Styled.div`
@@ -56,6 +52,11 @@ export const ContainerStyle = Styled.div`
   justify-content: space-around;
   padding-top: 200px;
   width: 95%;
+  @media only screen and (max-width: 720px) {
+    flex-direction: column;
+    padding-top: 100px;
+    width: 99%;
+  }
 `
 
 export const TextosStyle = Styled.div`
@@ -87,12 +88,22 @@ export const TextosStyle = Styled.div`
   a:hover {
     background-color: #67a32b;
   }
+  @media only screen and (max-width: 720px) {
+    text-align: center;
+    h1, h2 {
+      font-size: 1.9rem;
+    }
+  }
 `
 
 export const ImageStyle = Styled.img`
   object-fit: cover;
   animation: ${moveUp} 1s ease-in;
   width: 650px;
+  @media only screen and (max-width: 720px) {
+    margin: 50px 0;
+    width: 300px;
+  }
 `
 
 export const WaveStyle = Styled.div`

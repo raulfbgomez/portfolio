@@ -20,6 +20,23 @@ export const ContactContainer = Styled.div`
       }
     }
   }
+  
+  @media only screen and (max-width: 720px) {
+    h1 {
+      font-size: 1.4rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+`
+
+export const ContactIcons = Styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 30px auto;
+  width: 50%;
   a.icon {
     background-color: #fff;
     border-radius: 50%;
@@ -37,12 +54,13 @@ export const ContactContainer = Styled.div`
       transform: translateY(-7px);
     }
   }
-`
-
-export const ContactIcons = Styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 30px auto;
-  width: 50%;
+  @media only screen and (max-width: 720px) {
+    width: 100%;
+    a.icon {
+      font-size: 20px;
+      margin: 0 5px;
+      padding: 10px;
+      width: 25px;
+    }
+  }
 `

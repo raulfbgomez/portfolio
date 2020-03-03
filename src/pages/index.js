@@ -57,7 +57,7 @@ const Home = (props) => {
 
   const options = {
     rootMargin: '0px',
-    threshold: 0.7
+    threshold: 0.8
   }
 
   const options2 = {

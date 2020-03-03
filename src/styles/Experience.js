@@ -7,7 +7,7 @@ export const CardExperience = Styled.div`
   align-items: center;
   justify-content: space-around;
   margin: 30px auto;
-  width: 70%;
+  width: 85%;
   p.card-date {
     border-left: 3px solid ${props => props.theme.colors.secondary};
     color: #fff;
@@ -30,6 +30,23 @@ export const CardExperience = Styled.div`
     p {
       font-size: 1.2rem;
       line-height: 1.6rem;
+    }
+  }
+  @media only screen and (max-width: 720px) {
+    flex-direction: column;
+    width: 95%;
+    p.card-date {
+      text-align: center;
+      font-size: 1rem;
+      width: 90%;
+    }
+    div.card-content {
+      h1 {
+        font-size: 1.4rem;
+      }
+      p {
+        font-size: 1rem;
+      }
     }
   }
 `

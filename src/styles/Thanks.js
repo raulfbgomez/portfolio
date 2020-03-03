@@ -2,6 +2,7 @@ import Styled from 'styled-components'
 
 export const ThanksContainer = Styled.div`
   background-color: #3d3d3d;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,5 +20,10 @@ export const ThanksContainer = Styled.div`
     color: #fff;
     font-size: .8rem;
     text-decoration: none;
+  }
+  @media only screen and (max-width: 720px) {
+    p, a {
+      font-size: .6rem;
+    }
   }
 `
