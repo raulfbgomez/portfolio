@@ -1,7 +1,7 @@
 import { Title, Hr } from '../styles/Components'
 import { AboutStyle, Card } from '../styles/About'
 
-const About = () => (
+const About = React.forwardRef((props, ref) => {
   <AboutStyle>
     <Card>
       <Title>Sobre mi</Title>
@@ -12,6 +12,6 @@ const About = () => (
       <p>Cuando tengo un tiempo libre disfruto de aprender nuevas tecnologías web como Docker, Next, Gatsby y GCP en plataformas como YouTube, Scrimba, Udemy y <a href='https://platzi.com/@raulfbgomez/' target='_blank'>Platzi</a>, además cree un canal en YouTube en donde compartó un poco de mis conocimientos.</p>
     </Card>
   </AboutStyle>
-)
+})
 
 export default About

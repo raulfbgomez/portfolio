@@ -1,9 +1,15 @@
 import Styled from 'styled-components'
 import { moveRight } from './Header'
 
+export const Buuble = Styled.div`
+  position: absolute;
+  z-index: -2;
+  background-color: deepskyblue;
+  transform: scale(2);
+  transition: all 0.5s ease;
+`
+
 export const MenuStyle = Styled.nav`
-  // background-color: rgba(0, 0, 0, 0.1);
-  // box-shadow: 5px 5px 18px #000;
   position: fixed;
   top: 0;
   left: 0;
