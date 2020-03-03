@@ -25,7 +25,7 @@ export const moveRight = keyframes`
   }
 `
 
-const moveUp = keyframes`
+export const moveUp = keyframes`
   from {
     opacity: 0;
     transform: translateY(100px);

@@ -86,5 +86,5 @@ export const Container = Styled.section`
   -webkit-clip-path: polygon(0 0, 20% 100px, 100% 0, 100% 100%, 0 100%);
   clip-path: polygon(0 0, 20% 100px, 100% 0, 100% 100%, 0 100%);
   min-height: 90vh;
-  padding: 70px 0 40px;
+  padding: 100px 0 40px;
 `

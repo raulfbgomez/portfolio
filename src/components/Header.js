@@ -3,7 +3,7 @@ import Nav from './Nav'
 import Svg from '../svgs/Wave.svg'
 import Svg2 from '../svgs/Wave2.svg'
 
-const Cabecera =  React.forwardRef((props, ref) => {
+const Cabecera = () => {
   return (
     <>
     <HeaderStyle>
@@ -22,6 +22,6 @@ const Cabecera =  React.forwardRef((props, ref) => {
     </HeaderStyle>
     </>
   )
-})
+}
 
 export default Cabecera

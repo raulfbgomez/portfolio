@@ -2,7 +2,7 @@ import Styled from 'styled-components'
 
 // About Section
 export const AboutStyle  = Styled.div`
-  padding: 10px;
+  padding: 100px 0;
   text-align: center;
 `
 

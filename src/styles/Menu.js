@@ -1,11 +1,10 @@
 import Styled from 'styled-components'
-import { moveRight } from './Header'
+import { moveUp } from './Header'
 
 export const Buuble = Styled.div`
+  background: transparent;
   position: absolute;
   z-index: -2;
-  background-color: deepskyblue;
-  transform: scale(2);
   transition: all 0.5s ease;
 `
 
@@ -14,13 +13,14 @@ export const MenuStyle = Styled.nav`
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 9999;
   ul {
     display: flex;
     align-items: center;
     justify-content: end;
     margin: 0;
     li {
-      animation: ${moveRight} 1s ease-in;
+      // animation: ${moveUp} 1s ease-in;
       list-style: none;
       a {
         outline: none;
