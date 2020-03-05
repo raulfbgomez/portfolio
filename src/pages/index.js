@@ -22,6 +22,18 @@ const Home = (props) => {
   const [currentDiv, setCurrentDiv] = React.useState('home')
 
   let buuble = null
+
+  function animateCSS(element, animationName, callback) {
+    const node = element
+    node.classList.add('animated', animationName)
+    function handleAnimationEnd() {
+        node.classList.remove('animated', animationName)
+        node.removeEventListener('animationend', handleAnimationEnd)
+        if (typeof callback === 'function') callback()
+    }
+    node.addEventListener('animationend', handleAnimationEnd)
+}
+
   useEffect(() => {
     if (buuble === null) {
       buuble = document.querySelector('.buuble')
@@ -44,12 +56,19 @@ const Home = (props) => {
       buuble.style.background = 'transparent'
     }
     //
+    console.log(currentDiv)
+    const element = document.querySelector(`.${currentDiv}`)
+    const h1 = element.getElementsByTagName('h1')
+    if (h1) {
+      animateCSS(h1[0], 'swing')
+    }
+    console.log(h1[0])
   }, [currentDiv])
 
   function cb(entries) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        console.log('El div intersectado es', entry.target)
+        // console.log('El div intersectado es', entry.target)
         setCurrentDiv(entry.target.className)
       }
     })
@@ -57,7 +76,7 @@ const Home = (props) => {
 
   const options = {
     rootMargin: '0px',
-    threshold: 0.8
+    threshold: 0.7
   }
 
   const options2 = {
