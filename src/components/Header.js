@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import {HeaderStyle, ContainerStyle, TextosStyle, ImageStyle, WaveStyle} from '../styles/Header'
 import Nav from './Nav'
 import Svg from '../svgs/Wave.svg'
@@ -14,6 +15,9 @@ const Cabecera = () => {
           <h1>Raul Bautista Gomez</h1>
           <h2>Web Developer</h2>
           <a href='#contact'>Cantáctame</a>
+          <Link href='/signin'>
+            <a>Consulta tu proyecto</a>
+          </Link>
         </TextosStyle>
       </ContainerStyle>
       <WaveStyle>

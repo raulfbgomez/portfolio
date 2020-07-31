@@ -79,7 +79,7 @@ export const TextosStyle = Styled.div`
     display: inline-block;
     font-size: 1.5rem;
     font-weight: 300;
-    margin-top: 25px;
+    margin: 25px 10px 0;
     outline: none;
     padding: 10px 30px;
     text-decoration: none;

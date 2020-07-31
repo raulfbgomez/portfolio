@@ -3,7 +3,7 @@ import { ContactContainer, ContactIcons } from '../styles/Contact'
 const Contact = () => (
   <ContactContainer>
     <h1>¿Quieres contactarme?</h1>
-    <p>Por favor, enviame un correo a <a href="mailto:raulfbgomez@gmail.com">raulfbgomez@gmail.com</a></p>
+    <p>Por favor, enviame un correo a <a href="mailto:saluda@raulfbgomez.dev">saluda@raulfbgomez.dev</a></p>
     <p>O también lo puedes hacer a travéz de mis redes sociales</p>
     <ContactIcons>
       <a href="https://www.facebook.com/Raul-Bautista-Gomez-104803481049522" target='_blank' className="fa fa-facebook icon"></a>
