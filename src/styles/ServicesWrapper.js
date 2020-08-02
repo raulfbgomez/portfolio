@@ -44,3 +44,11 @@ export const ServicesWrapper = Styled.div`
     }
   }
 `
+
+export const Message = Styled.div`
+  background-color: crimson;
+  border-radius: 5px;
+  color: #fff;
+  margin-bottom: 10px;
+  padding: 10px;
+`
