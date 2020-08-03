@@ -19,3 +19,8 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
    $router->post('/signin', 'AuthController@signin');
    $router->post('/signup', 'AuthController@signup');
 });
+
+$router->group(['prefix' => 'user'], function () use ($router) {
+   $router->get('/dashboard/{user_id}', 'UserController@dashboard');
+   $router->get('/clients/{offset}', 'UserController@clients');
+});

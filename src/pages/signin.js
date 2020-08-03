@@ -4,6 +4,7 @@ import axios from 'axios'
 import Layout from '../components/Layout'
 import Nav from '../components/Nav'
 import { Message, ServicesWrapper } from '../styles/ServicesWrapper'
+import { API_URI } from '../utils/variables'
 
 const Services = () => {
 
@@ -21,13 +22,17 @@ const Services = () => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(inputs)
-    axios.post('http://localhost:8000/auth/signin', JSON.stringify(inputs))
+    setMessage('Validando...')
+    axios.post(`${API_URI}auth/signin`, JSON.stringify(inputs))
     .then((response) => {
-      if (response.data == 'success') {
-        Router.push('/dashboard')
+      if (response.data.message == 'success') {
+        if (response.data.is_admin == 1) {
+          Router.push(`/dashboard/admin/${response.data.user_id}`)
+        } else {
+          Router.push(`/dashboard/${response.data.user_id}`)
+        }
       }
-      setMessage(response.data)
+      setMessage(response.data.message)
     })
     .catch(err => {
       console.log(err)

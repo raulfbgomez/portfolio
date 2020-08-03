@@ -4,6 +4,7 @@ import axios from 'axios'
 import Layout from '../components/Layout'
 import Nav from '../components/Nav'
 import { Message, ServicesWrapper } from '../styles/ServicesWrapper'
+import { API_URI } from '../utils/variables'
 
 const SignUp = () => {
 
@@ -22,12 +23,13 @@ const SignUp = () => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    axios.post('http://localhost:8000/auth/signup', JSON.stringify(inputs))
+    setMessage('Validando...')
+    axios.post(`${API_URI}auth/signup`, JSON.stringify(inputs))
     .then((response) => {
-      if (response.data == 'success') {
-        Router.push('/dashboard')
+      if (response.data.message == 'success') {
+        Router.push(`/dashboard/${response.data.user_id}`)
       }
-      setMessage(response.data)
+      setMessage(response.data.message)
     })
     .catch(err => console.log(err))
   }
@@ -43,7 +45,7 @@ const SignUp = () => {
               <Message>{ message }</Message>
             :''
             }
-            <input type='text' name='name' onChange={handleChange} placeholder='Ingresa tu nombre' />
+            <input type='text' name='name' onChange={handleChange} placeholder='Ingresa tu nombre completo' />
             <input type='email' name='email' onChange={handleChange} placeholder='Ingresa tu email' />
             <input type='password' name='password' onChange={handleChange} placeholder='Ingresa tu contraseña' />
             <button type='submit'>Iniciar sesión</button>

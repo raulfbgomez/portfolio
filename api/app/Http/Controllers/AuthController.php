@@ -21,33 +21,39 @@ class AuthController extends Controller
     public function signin(Request $request) {
       $data = json_decode($request->getContent(), true);
       if (empty($data['email']) || empty($data['password'])) {
-        return 'Favor de rellenar todos los campos.';
+        return ['message' => 'Favor de rellenar todos los campos.'];
       } else {
         $user = User::where('email', $data['email'])->first();
         if ($user) {
           if (Hash::check($data['password'], $user->password)) {
-            return 'success';
+            return [
+              'message'  => 'success',
+              'user_id'  => $user->id,
+              'is_admin' => $user->isAdmin
+            ];
           }
         }
-        return 'Favor de verificar sus datos.';
+        return ['message' => 'Favor de verificar sus datos.'];
       }
     }
 
     public function signup(Request $request) {
       $data = json_decode($request->getContent(), true);
       if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
-        return 'Favor de rellenar todos los campos.';
+        return ['message' => 'Favor de rellenar todos los campos.'];
       } else {
         $userExist = User::where('email', $data['email'])->first();
         if ($userExist) {
-          return 'El email ingresado ya se encuentra registrado.';
+          return ['message' => 'El email ingresado ya se encuentra registrado.'];
         }
-        $user = new User();
-        $user->name = $data['name'];
-        $user->email = $data['email'];
+        $user           = new User();
+        $user->name     = $data['name'];
+        $user->email    = $data['email'];
         $user->password = Hash::make($data['password']);
+        $user->isActive = 1;
+        $user->isAdmin  = 0;
         $user->save();
-        return 'success';
+        return ['message' => 'success', 'user_id' => $user->id];
       }
     }
 }
