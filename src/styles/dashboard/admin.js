@@ -75,7 +75,22 @@ export const FormBlock = Styled.form`
     padding: 10px;
     margin: 7px 0;
   }
-  div {
+  textarea {
+    height: 500px;
+  }
+  label {
+    background-color: #fff;
+    border: 1px solid #f3f3f3;
+    border-radius: 7px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 7px 0;
+    padding: 10px;
+    width: 100%;
+  }
+  div.buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -166,7 +181,7 @@ export const Title = Styled.h1`
 
 export const Wrapper = Styled.section`
   background-color: #f7f6f3;
-  height: 100vh;
+  min-height: 100vh;
   margin-top: 75px;
-  padding-top: 20px;
+  padding: 20px 0;
 `

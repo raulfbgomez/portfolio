@@ -20,12 +20,13 @@ const Dashboard = ({ user }) => {
   const [offset, setOffset] = React.useState(0)
 
   function getData() {
-    axios.get(`${API_URI}user/clients/${offset}`)
+    axios.get(`${API_URI}admin/clients/${offset}`)
     .then(response => {
       response.data.map(item => {
         setUsers(prev => ([...prev, item ]))
       })
     }).then(() => setOffset(prev => prev + 10))
+    .catch(err => console.log(err))
   }
 
   React.useEffect(() => {
@@ -57,16 +58,30 @@ const Dashboard = ({ user }) => {
                 </Link>
                 <div>
                   <h3>Planes</h3>
-                  <ul>
-                    <li>Pagina web basica</li>
-                    <li>Correo Basic</li>
-                  </ul>
-                  <Link href='/'>
-                    <Anchor><i className='fa fa-plus'></i> Agregar</Anchor>
-                  </Link>
-                  <Link href='/'>
+                    {/* <li>Pagina web basica</li>
+                    <li>Correo Basic</li> */}
+                    {item.plans.length > 0 ?
+                      <>
+                        <ul>
+                          {item.plans.map(plan => (
+                            <li>{ plan.name }</li>
+                          ))}
+                        </ul>
+                        <Link href={`/dashboard/plan/edit/${item.id}`}>
+                        <Anchor><i className='fa fa-pencil'></i> Editar</Anchor>
+                        </Link>
+                        <Link href={`/dashboard/plan/show/${item.id}`}>
+                        <Anchor><i className='fa fa-eye'></i> Detalles</Anchor>
+                        </Link>
+                      </>
+                    : 
+                    <Link href={`/dashboard/plan/add/${item.id}`}>
+                      <Anchor><i className='fa fa-plus'></i> Agregar</Anchor>
+                    </Link>
+                    }
+                  {/* <Link href='/'>
                     <Anchor><i className='fa fa-pencil'></i> Editar</Anchor>
-                  </Link>
+                  </Link> */}
                 </div>
               </ClientItem>
             ))}
@@ -82,8 +97,12 @@ const Dashboard = ({ user }) => {
 
 Dashboard.getInitialProps = async (ctx) => {
 
-  const res = await axios.get(`${API_URI}user/dashboard/${ctx.query.user_id}`)
-  return {user: res.data}
+  const res = await axios.get(`${API_URI}admin/dashboard/${ctx.query.user_id}`)
+  .catch(err => console.log(err))
+  if (res) {
+    return {user: res.data}
+  }
+  return {user: {}}
   
 }
 

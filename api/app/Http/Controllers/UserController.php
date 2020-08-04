@@ -16,18 +16,7 @@ class UserController extends Controller
   }
 
   public function dashboard($user_id) {
-    $user = User::find($user_id);
-    if ($user) {
-      return array(
-        'name'  => $user->name,
-        'email' => $user->email,
-      );
-    }
-    return ['name' => 'Error'];
+    
   }
 
-  public function clients($offset) {
-    $users = User::where('isActive', 1)->where('isAdmin', 0)->take(10)->offset($offset)->get();
-    return $users;
-  }
 }
