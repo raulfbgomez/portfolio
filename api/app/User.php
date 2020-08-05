@@ -31,6 +31,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     public function plans() {
-        return $this->belongsToMany('App\Plan');
+        return $this->belongsToMany('App\Plan')->withPivot('agreedPrice', 'delivery');
     }
 }

@@ -23,8 +23,11 @@ $router->group(['prefix' => 'auth'], function () use ($router) {
 $router->group(['prefix' => 'admin'], function () use ($router) {
    $router->get('/dashboard/{user_id}', 'AdminController@dashboard');
    $router->get('/clients/{offset}', 'AdminController@clients');
-   // Planes
+   // Plans
    $router->post('/plan', 'AdminController@planStore'); // store
    $router->get('/plan/{user_id}', 'AdminController@plans'); // get plans for customers
    $router->post('/plan/user', 'AdminController@planAdd');
+   $router->get('/plan/{user_id}/edit', 'AdminController@planEdit');
+   $router->post('/plan/{user_id}/remove', 'AdminController@planRemove');
+   $router->post('/plan/{user_id}/update', 'AdminController@planUpdate');
 });

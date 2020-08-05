@@ -46,7 +46,7 @@ class AdminController extends Controller
   }
 
   public function plans($user_id) {
-    $user = User::find($user_id);
+    $user  = User::find($user_id);
     $plans = Plan::orderBy('name')->get();
     return ['user' => $user, 'plans' => $plans];
   }
@@ -56,10 +56,51 @@ class AdminController extends Controller
     if (empty($data['user_id'])) {
       return ['message' => 'user not found'];
     } else {
-      $dt = new \DateTime();
+      $dt   = new \DateTime();
       $user = User::find($data['user_id']);
-      $user->plans()->attach($data['plans'], ['agreedPrice' => '$0', 'delivery' => $dt->format('Y-m-d')]);
+      $user->plans()->attach($data['plans'], ['agreedPrice' => '', 'delivery' => $dt->format('Y-m-d')]);
       return ['message' => 'success'];
     }
+  }
+
+  public function planEdit($user_id) {
+    $user = User::select('id', 'name', 'email')->where('id', $user_id)->first();
+    $user->load('plans');
+    if ($user) {
+      return $user;
+    }
+  }
+
+  public function planRemove(Request $request, $user_id) {
+    if ($user_id) {
+      $data = json_decode($request->getContent(), true);
+      $user = User::find($user_id);
+      if ($user) {
+        $user->plans()->detach($data['id']);
+        return ['message' => 'success'];
+      }
+    }
+    return ['message' => 'error'];
+  }
+
+  public function planUpdate(Request $request, $user_id) {
+    if ($user_id) {
+      $plans = json_decode($request->getContent(), true);
+      $user  = User::find($user_id);
+      if ($user) {
+        $user->plans()->detach();
+        foreach ($plans as $plan) {
+          $sync = array(
+            $plan['id'] => array(
+              'agreedPrice' => $plan['pivot']['agreedPrice'],
+              'delivery'    => $plan['pivot']['delivery']
+            )
+          );
+          $user->plans()->attach($sync); 
+        }
+        return ['message' => 'success'];
+      }
+    }
+    return ['message' => 'error'];
   }
 }

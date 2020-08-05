@@ -31,7 +31,7 @@ const Add = (data) => {
     }))
     .then(res => {
       if (res.data.message == 'success') {
-        Router.push('/dashboard/admin/1')
+        Router.push(`/dashboard/plan/edit/${data.res.user.id}`)
       }
     })
     .catch(err => console.log(err))
@@ -43,13 +43,11 @@ const Add = (data) => {
         <Title>Agregar un nuevo plan para { data.res.user.name }</Title>
         <FormBlock onSubmit={handleSubmit}>
           {data.res.plans.map(plan => (
-            <>
             <label key={plan.id}>
               <span>{ plan.name } <br /> { plan.price }</span>
               <span dangerouslySetInnerHTML={{ __html: plan.description }}></span>
               <input type='checkbox' name={`name${plan.id}`} value={plan.id} onChange={handleClick} />
             </label>
-            </>
           ))}
           <div className='buttons'>
             <Link href='/dashboard/admin/1'>

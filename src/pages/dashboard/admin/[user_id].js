@@ -53,13 +53,9 @@ const Dashboard = ({ user }) => {
           <Clients>
             {users.map(item =>(
               <ClientItem key={item.id}>
-                <Link href='/'>
-                  <a className='name'><h2>{ item.name }</h2></a>
-                </Link>
+                <h2>{ item.name }</h2>
                 <div>
-                  <h3>Planes</h3>
-                    {/* <li>Pagina web basica</li>
-                    <li>Correo Basic</li> */}
+                  <h3>Planes contratados</h3>
                     {item.plans.length > 0 ?
                       <>
                         <ul>
@@ -68,20 +64,17 @@ const Dashboard = ({ user }) => {
                           ))}
                         </ul>
                         <Link href={`/dashboard/plan/edit/${item.id}`}>
-                        <Anchor><i className='fa fa-pencil'></i> Editar</Anchor>
-                        </Link>
-                        <Link href={`/dashboard/plan/show/${item.id}`}>
                         <Anchor><i className='fa fa-eye'></i> Detalles</Anchor>
+                        </Link>
+                        <Link href={`/dashboard/plan/add/${item.id}`}>
+                          <Anchor><i className='fa fa-plus'></i> Agregar plan</Anchor>
                         </Link>
                       </>
                     : 
-                    <Link href={`/dashboard/plan/add/${item.id}`}>
-                      <Anchor><i className='fa fa-plus'></i> Agregar</Anchor>
-                    </Link>
+                      <Link href={`/dashboard/plan/add/${item.id}`}>
+                        <Anchor><i className='fa fa-plus'></i> Nuevo plan</Anchor>
+                      </Link>
                     }
-                  {/* <Link href='/'>
-                    <Anchor><i className='fa fa-pencil'></i> Editar</Anchor>
-                  </Link> */}
                 </div>
               </ClientItem>
             ))}
@@ -103,7 +96,6 @@ Dashboard.getInitialProps = async (ctx) => {
     return {user: res.data}
   }
   return {user: {}}
-  
 }
 
 

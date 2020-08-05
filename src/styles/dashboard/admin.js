@@ -1,4 +1,4 @@
-import Styled from 'styled-components'
+import Styled, { css } from 'styled-components'
 
 export const Anchor = Styled.a`
   background-color: #fff;
@@ -26,11 +26,11 @@ export const Button = Styled.button`
   border-radius: 7px;
   color: #fff;
   display: inline-block;
-  margin: 15px auto;
+  margin: 15px 5px;
   opacity: 0.8;
   padding: 10px;
   transition: .3s;
-  width: 250px;
+  min-width: 120px;
   &:hover {
     cursor: pointer;
     opacity: 1;
@@ -138,6 +138,23 @@ export const FormInline = Styled.form`
     border: none;
     padding: 10px;
   }
+`
+
+export const Message = Styled.div`
+  background: #f2f2f2;
+  border-radius: 7px;
+  color: white;
+  display: block:
+  margin: 15px auto;
+  padding: 10px;
+  text-align: center;
+  width: 80%;
+  ${props => props.type == 'error' && css`
+    background: crimson;
+  `}
+  ${props => props.type == 'success' && css`
+    background: green;
+  `}
 `
 
 export const Nav = Styled.nav`
