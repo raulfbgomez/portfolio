@@ -58,7 +58,9 @@ class AdminController extends Controller
     } else {
       $dt   = new \DateTime();
       $user = User::find($data['user_id']);
-      $user->plans()->attach($data['plans'], ['agreedPrice' => '', 'delivery' => $dt->format('Y-m-d')]);
+      $user->plans()->attach(
+        $data['plans']
+      );
       return ['message' => 'success'];
     }
   }
@@ -76,7 +78,7 @@ class AdminController extends Controller
       $data = json_decode($request->getContent(), true);
       $user = User::find($user_id);
       if ($user) {
-        $user->plans()->detach($data['id']);
+        $user->plans()->wherePivot('id', $data['id'])->detach($data['plan_id']);
         return ['message' => 'success'];
       }
     }
@@ -92,8 +94,11 @@ class AdminController extends Controller
         foreach ($plans as $plan) {
           $sync = array(
             $plan['id'] => array(
+              'url_test'    => $plan['pivot']['url_test'],
+              'url_prod'    => $plan['pivot']['url_prod'],
               'agreedPrice' => $plan['pivot']['agreedPrice'],
-              'delivery'    => $plan['pivot']['delivery']
+              'delivery'    => $plan['pivot']['delivery'],
+              'paymentDate' => $plan['pivot']['paymentDate']
             )
           );
           $user->plans()->attach($sync); 

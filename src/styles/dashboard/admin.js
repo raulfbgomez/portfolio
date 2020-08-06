@@ -74,6 +74,7 @@ export const FormBlock = Styled.form`
     box-sizing: border-box;
     padding: 10px;
     margin: 7px 0;
+    outline: none;
   }
   textarea {
     height: 500px;
@@ -116,6 +117,49 @@ export const FormBlock = Styled.form`
   }
 `
 
+export const FormBlockSlim = Styled.form`
+  display: flex;
+  flex-direction: column;
+  label {
+    padding: 5px;
+    margin-top: 15px;
+  }
+  input {
+    background-color: #fff;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    outline: none;
+    padding: 5px;
+    &:focus {
+      border: 1px solid lightblue;
+    }
+  }
+  div.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    button {
+      background-color: #fff;
+      border: 1px solid ${props => props.theme.colors.primary};
+      border-radius: 7px;
+      color: ${props => props.theme.colors.primary};
+      margin: 10px 0;
+      outline: none;
+      padding: 10px;
+      transition: .4s;
+      i {
+        padding-right: 5px;
+      }
+      &:hover {
+        background-color: ${props => props.theme.colors.primary};
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+`
+
 export const FormInline = Styled.form`
   display: flex;
   margin: 20px auto;
@@ -126,6 +170,7 @@ export const FormInline = Styled.form`
     background-color: #fff;
     border: 1px solid #f2f2f2;
     border-radius: 7px;
+    outline: none;
     padding: 10px;
     transition: 0.3s ease-out;
     width: 50%;

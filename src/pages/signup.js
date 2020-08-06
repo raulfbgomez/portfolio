@@ -29,9 +29,11 @@ const SignUp = () => {
       if (response.data.message == 'success') {
         Router.push(`/dashboard/${response.data.user_id}`)
       }
-      setMessage(response.data.message)
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      setMessage('Ocurrió un error, por favor intentalo nuevamente')
+      console.log(err)
+    })
   }
 
   return (
@@ -48,7 +50,7 @@ const SignUp = () => {
             <input type='text' name='name' onChange={handleChange} placeholder='Ingresa tu nombre completo' />
             <input type='email' name='email' onChange={handleChange} placeholder='Ingresa tu email' />
             <input type='password' name='password' onChange={handleChange} placeholder='Ingresa tu contraseña' />
-            <button type='submit'>Iniciar sesión</button>
+            <button type='submit'>Crear cuenta</button>
             <p>¿Ya tienes una cuenta? <Link href='/signin'><a>Iniciar sesión</a></Link> </p>
           </form>
         </ServicesWrapper>

@@ -17,9 +17,13 @@ export const ServicesWrapper = Styled.div`
     flex-direction: column;
     width: 500px;
     input {
+      border-radius: 5px;
       box-sizing: border-box;
+      font-family: 'Spartan', sans-serif;
+      font-size: 1em;
       margin: 5px 0;
-      padding: 10px;
+      outline: none;
+      padding: 15px 10px;
       width: 100%
     }
     button {
@@ -27,6 +31,8 @@ export const ServicesWrapper = Styled.div`
       border: none;
       border-radius: 7px;
       color: #fff;
+      font-family: 'Spartan', sans-serif;
+      font-size: 1em;
       margin-top: 25px;
       opacity: 0.8;
       padding: 10px;
