@@ -16,7 +16,8 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('plan_user_id');
-            $table->string('paymentInAdvance');
+            $table->string('amount');
+            $table->date('date');
             $table->timestamps();
         });
     }

@@ -10,6 +10,7 @@ import {
   Clients,
   ClientItem,
   FormBlockSlim,
+  List,
   Message,
   Wrapper,
   Title
@@ -17,18 +18,20 @@ import {
 
 const Edit = ({ query }) => {
 
-  const [selected, setSelected]   = React.useState()
-  const [plans, setPlans]         = React.useState([])
-  const [user, setUser]           = React.useState([])
-  const [message, setMessage]     = React.useState({
+  const [selected, setSelected] = React.useState()
+  const [plans, setPlans]       = React.useState([])
+  const [user, setUser]         = React.useState([])
+  const [message, setMessage]   = React.useState({
     data: '',
     type: ''
   })
+  const [showForm, setShowForm] = React.useState(true)
 
   React.useEffect(() => {
     axios.get(`${API_URI}admin/plan/${query.user_id}/edit`)
       .then(res => {
-        setUser(res.data)
+        console.log(res.data.user)
+        setUser(res.data.user)
         setPlans(res.data.plans)
       })
   }, [])
@@ -110,6 +113,11 @@ const Edit = ({ query }) => {
           <Link href={`/dashboard/plan/add/${user.id}`}>
             <Anchor><i className='fa fa-plus'></i> Agregar plan</Anchor>
           </Link>
+          <Button 
+            onClick={() => setShowForm(prev => !prev)}>
+              <i className='fa fa-eye'></i> 
+              Editar información
+          </Button>
           <br />
           {message.data ?
             <>
@@ -121,6 +129,7 @@ const Edit = ({ query }) => {
           : ''}
         </Center>
 
+
         {plans.length > 0 ?
           <Clients>
             {plans.map((plan, index) => (
@@ -129,49 +138,94 @@ const Edit = ({ query }) => {
                 <p>{ plan.price }</p>
                 <div dangerouslySetInnerHTML={{ __html: plan.description }}></div>
 
-                <FormBlockSlim onSubmit={(e) => handleSubmit(e, index)}>
-                  <label>Fecha de entrega del proyecto</label>
-                  <input 
-                    type='date' 
-                    name='delivery' 
-                    value={ plan.pivot.delivery } 
-                    onChange={ (evt) => handleDelivery(evt, index) } />
-                  <label>Fecha de pago</label>
-                  <input 
-                    type='text' 
-                    name='paymentDate' 
-                    value={ plan.pivot.paymentDate } 
-                    onChange={ (evt) => handlePaymentDate(evt, index) }
-                    placeholder='20 de cada mes, diciembre de cada año' />
-                  <label>URL para test</label>
-                  <input 
-                    type='text'
-                    name='url_test'
-                    value={ plan.pivot.url_test }
-                    onChange={ (evt) => handleUrlTest(evt, index) } />
-                  <label>URL del proyecto terminado</label>
-                  <input 
-                    type='text'
-                    name='url_prod'
-                    value={ plan.pivot.url_prod } 
-                    onChange={ (evt) => handleUrlProd(evt, index) } />
-                  <label>Precio acordado</label>
-                  <input 
-                    type='text' 
-                    name='agreedPrice' 
-                    value={ plan.pivot.agreedPrice } 
-                    onChange={ (evt) => handlePrice(evt, index) } />
-                  
-                  <div className='buttons'>
-                    <button type='button' onClick={() => setSelected({
-                      id: plan.pivot.id,
-                      plan_id: plan.id,
-                      name: plan.name
-                    })}><i className='fa fa-remove'></i> Eliminar</button>
-                    <button type='submit'><i className='fa fa-save'></i> Guardar</button>
-                  </div>
-                </FormBlockSlim>
-
+                {showForm ?
+                  <FormBlockSlim onSubmit={(e) => handleSubmit(e, index)}>
+                    <label>Fecha de entrega del proyecto</label>
+                    <input 
+                      type='date' 
+                      name='delivery' 
+                      value={ plan.pivot.delivery } 
+                      onChange={ (evt) => handleDelivery(evt, index) } />
+                    <label>Fecha de pago</label>
+                    <input 
+                      type='text' 
+                      name='paymentDate' 
+                      value={ plan.pivot.paymentDate } 
+                      onChange={ (evt) => handlePaymentDate(evt, index) }
+                      placeholder='20 de cada mes, diciembre de cada año' />
+                    <label>URL para test</label>
+                    <input 
+                      type='text'
+                      name='url_test'
+                      value={ plan.pivot.url_test }
+                      onChange={ (evt) => handleUrlTest(evt, index) } />
+                    <label>URL del proyecto terminado</label>
+                    <input 
+                      type='text'
+                      name='url_prod'
+                      value={ plan.pivot.url_prod } 
+                      onChange={ (evt) => handleUrlProd(evt, index) } />
+                    <label>Precio acordado</label>
+                    <input 
+                      type='text' 
+                      name='agreedPrice' 
+                      value={ plan.pivot.agreedPrice } 
+                      onChange={ (evt) => handlePrice(evt, index) } />
+                    
+                    <List>
+                      <p>Pagos</p>
+                      {plan.payments.length == 0 ?
+                        <p>No hay pagos realizados</p>
+                      :
+                      <>
+                        <ul>
+                          {plan.payments.map(pago => (
+                            <li>
+                              <span>{ pago.date } </span>
+                              <span>{ pago.amount } </span>
+                              <button><i className='fa fa-remove'></i></button>
+                            </li>
+                          ))}
+                        </ul>
+                        <ul>
+                          <li>
+                            <span>TOTAL A PAGAR: </span>
+                            <span>{ plan.totalPay }</span>
+                          </li>
+                          <li>
+                            <span>TOTAL DE PAGOS: </span>
+                            <span>{ plan.totalPayments }</span>
+                          </li>
+                          <li>
+                            <span>DEBE: </span>
+                            <span>{ plan.remaining }</span>
+                          </li>
+                        </ul>
+                      </>
+                      }
+                      <Link href={`/dashboard/plan/payment/${ plan.pivot.id }`}>
+                          <a><i className='fa fa-plus'></i> Agregar pago</a>
+                      </Link>
+                    </List>
+                    
+                    <div className='buttons'>
+                      <button type='button' 
+                        onClick={() => setSelected({
+                          id: plan.pivot.id,
+                          plan_id: plan.id,
+                          name: plan.name })}>
+                        <i className='fa fa-remove'></i> 
+                        Eliminar
+                      </button>
+                      <button type='submit'>
+                        <i className='fa fa-save'></i> 
+                        Guardar
+                      </button>
+                    </div>
+                  </FormBlockSlim>
+                : 
+                  <p>...</p>
+                }
               </ClientItem>
             ))}
           </Clients>
