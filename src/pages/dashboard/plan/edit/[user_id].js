@@ -25,25 +25,29 @@ const Edit = ({ query }) => {
     data: '',
     type: ''
   })
-  const [showForm, setShowForm] = React.useState(true)
+  const [showForm, setShowForm] = React.useState(false)
 
-  React.useEffect(() => {
+  function getInitialData() {
     axios.get(`${API_URI}admin/plan/${query.user_id}/edit`)
-      .then(res => {
-        console.log(res.data.user)
-        setUser(res.data.user)
-        setPlans(res.data.plans)
-      })
-  }, [])
+    .then(res => {
+      setUser(res.data.user)
+      setPlans(res.data.plans)
+    })
+  } 
 
   React.useEffect(() => {
+   getInitialData()
+  }, [])
+  // EVITAR REALOAD y si vuelvo a pedir info al server y no recargo ?
+  React.useEffect(() => { 
     if (selected) {
       let con = confirm(`Deseas eliminar el plan ${selected.name}`)
       if (con) {
         axios.post(`${API_URI}admin/plan/${user.id}/remove`, JSON.stringify(selected))
           .then(response => {
             if (response.data.message == 'success') {
-              Router.push(`/dashboard/plan/edit/${user.id}`)
+              // Router.push(`/dashboard/plan/edit/${user.id}`)
+              getInitialData()
             }
           })
           .catch(err => console.log(err))
@@ -92,17 +96,35 @@ const Edit = ({ query }) => {
     setPlans(newPlans)
   }
 
-  function handleSubmit(evt, index) {
+  function handleSubmit(evt) {
     evt.preventDefault()
+    setShowForm(false)
     axios.post(`${API_URI}admin/plan/${user.id}/update`, JSON.stringify(plans))
       .then(res => {
-        if (res.data.message == 'error') {
-          setMessage({data: 'Ops! Ocurrio un error', type: 'error'})
-        } else {
+        if (res.data.message == 'success') {
           setMessage({data: 'Cambios guardados correctamente', type: 'success'})
+        } else {
+          setMessage({data: 'Ops! Ocurrio un error', type: 'error'})
         }
       })
       .catch(err => console.log(err))
+  }
+
+  function handleDeletePayment(evt, pago) {
+    let conf = confirm(`Seguro que deseas eliminar el pago por ${pago.amount}`)
+    if (conf) {
+      setShowForm(false)
+      axios.post(`${API_URI}admin/payment/delete/${pago.id}`)
+        .then(res => {
+          if (res.data.message == 'success') {
+            setMessage({data: 'Pago eliminado correctamente', type: 'success'})
+            getInitialData()
+          } else  {
+            setMessage({data: 'Ops! Ocurrio un error', type: 'error'})
+          }
+        })
+        .catch(err => console.log(err))
+    }
   }
   
   return (
@@ -138,8 +160,9 @@ const Edit = ({ query }) => {
                 <p>{ plan.price }</p>
                 <div dangerouslySetInnerHTML={{ __html: plan.description }}></div>
 
-                {showForm ?
-                  <FormBlockSlim onSubmit={(e) => handleSubmit(e, index)}>
+                <FormBlockSlim onSubmit={(e) => handleSubmit(e)}>
+                  {showForm ?
+                  <>
                     <label>Fecha de entrega del proyecto</label>
                     <input 
                       type='date' 
@@ -171,61 +194,67 @@ const Edit = ({ query }) => {
                       name='agreedPrice' 
                       value={ plan.pivot.agreedPrice } 
                       onChange={ (evt) => handlePrice(evt, index) } />
+                  </>
+                  : 
+                    <p> ... </p>
+                  }
                     
-                    <List>
-                      <p>Pagos</p>
-                      {plan.payments.length == 0 ?
-                        <p>No hay pagos realizados</p>
-                      :
-                      <>
-                        <ul>
-                          {plan.payments.map(pago => (
-                            <li>
-                              <span>{ pago.date } </span>
-                              <span>{ pago.amount } </span>
-                              <button><i className='fa fa-remove'></i></button>
-                            </li>
-                          ))}
-                        </ul>
-                        <ul>
+                  <List>
+                    <p>Pagos</p>
+                    {plan.payments.length == 0 ?
+                      <p>No hay pagos realizados</p>
+                    :
+                    <>
+                      <ul>
+                        {plan.payments.map(pago => (
                           <li>
-                            <span>TOTAL A PAGAR: </span>
-                            <span>{ plan.totalPay }</span>
+                            <span>{ pago.date } </span>
+                            <span>{ pago.amount } </span>
+                            <button 
+                              type='button' 
+                              onClick={(evt) => handleDeletePayment(evt, pago)}>
+                                <i className='fa fa-remove'></i>
+                            </button>
                           </li>
-                          <li>
-                            <span>TOTAL DE PAGOS: </span>
-                            <span>{ plan.totalPayments }</span>
-                          </li>
-                          <li>
-                            <span>DEBE: </span>
-                            <span>{ plan.remaining }</span>
-                          </li>
-                        </ul>
-                      </>
-                      }
-                      <Link href={`/dashboard/plan/payment/${ plan.pivot.id }`}>
-                          <a><i className='fa fa-plus'></i> Agregar pago</a>
-                      </Link>
-                    </List>
+                        ))}
+                      </ul>
+                      <ul>
+                        <li>
+                          <span>TOTAL A PAGAR: </span>
+                          <span>{ plan.totalPay }</span>
+                        </li>
+                        <li>
+                          <span>TOTAL DE PAGOS: </span>
+                          <span>{ plan.totalPayments }</span>
+                        </li>
+                        <li>
+                          <span>DEBE: </span>
+                          <span>{ plan.remaining }</span>
+                        </li>
+                      </ul>
+                    </>
+                    }
+                    <Link href={`/dashboard/plan/payment/${ plan.pivot.id }`}>
+                        <a><i className='fa fa-plus'></i> Agregar pago</a>
+                    </Link>
+                  </List>
                     
-                    <div className='buttons'>
-                      <button type='button' 
-                        onClick={() => setSelected({
-                          id: plan.pivot.id,
-                          plan_id: plan.id,
-                          name: plan.name })}>
-                        <i className='fa fa-remove'></i> 
-                        Eliminar
-                      </button>
-                      <button type='submit'>
-                        <i className='fa fa-save'></i> 
-                        Guardar
-                      </button>
-                    </div>
-                  </FormBlockSlim>
-                : 
-                  <p>...</p>
-                }
+                  <div className='buttons'>
+                    <button type='button' 
+                      onClick={() => setSelected({
+                        id: plan.pivot.id,
+                        plan_id: plan.id,
+                        name: plan.name })}>
+                      <i className='fa fa-remove'></i> 
+                      Eliminar
+                    </button>
+                    <button type='submit'>
+                      <i className='fa fa-save'></i> 
+                      Guardar
+                    </button>
+                  </div>
+                </FormBlockSlim>
+                
               </ClientItem>
             ))}
           </Clients>

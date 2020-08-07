@@ -178,4 +178,15 @@ class AdminController extends Controller
     }
     return ['message' => 'error'];
   }
+
+  public function paymentDelete($id) {
+    if ($id) {
+      $payment = Payment::find($id);
+      if ($payment) {
+        $payment->delete();
+        return ['message' => 'success'];
+      }
+    }
+    return ['message' => 'error'];
+  }
 }

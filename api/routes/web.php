@@ -33,4 +33,5 @@ $router->group(['prefix' => 'admin'], function () use ($router) {
    // Payments
    $router->get('payment/user/{plan_user_id}', 'AdminController@paymentUser');
    $router->post('payment/plan/{plan_user_id}', 'AdminController@paymentPlan');
+   $router->post('payment/delete/{id}', 'AdminController@paymentDelete');
 });
