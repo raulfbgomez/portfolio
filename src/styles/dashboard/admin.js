@@ -67,7 +67,7 @@ export const FormBlock = Styled.form`
   flex-direction: column;
   margin: 0 auto;
   width: 45%;
-  input, textarea {
+  input, textarea, select {
     background-color: #fff;
     border: 1px solid lightgray;
     border-radius: 7px;
@@ -122,6 +122,10 @@ export const FormBlock = Styled.form`
         opacity: 1;
       }
     }
+  }
+  p.error {
+    color: crimson;
+    font-weight: 600;
   }
 `
 
@@ -254,7 +258,7 @@ export const Message = Styled.div`
   background: #f2f2f2;
   border-radius: 7px;
   color: white;
-  display: block:
+  display: block;
   margin: 15px auto;
   padding: 10px;
   text-align: center;

@@ -22,7 +22,6 @@ class CreatePlanUserTable extends Migration
             $table->string('agreedPrice')->nullable()->default('');
             $table->date('delivery')->nullable()->default(null);
             $table->string('paymentDate')->nullable()->default('');
-            $table->integer('paid')->default(0);
             $table->timestamps();
         });
     }

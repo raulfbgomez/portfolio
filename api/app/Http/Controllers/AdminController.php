@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{ Plan, User, Payment };
+use App\{ Frequency, Plan, Payment, User };
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -35,20 +35,21 @@ class AdminController extends Controller
 
   public function planStore(Request $request) {
     $data = json_decode($request->getContent(), true);
-    if (empty($data['name']) && empty($data['price']) && empty($data['description'])) {
+    if (empty($data['name']) && empty($data['price']) && empty($data['description']) && empty($data['frequency_id'])) {
       return ['message' => 'Empty fields'];
     }
-    $plan              = new Plan();
-    $plan->name        = $data['name'];
-    $plan->price       = $data['price'];
-    $plan->description = $data['description'];
+    $plan               = new Plan();
+    $plan->frequency_id = $data['frequency_id'];
+    $plan->name         = $data['name'];
+    $plan->price        = $data['price'];
+    $plan->description  = $data['description'];
     $plan->save();
     return ['message' => 'success'];
   }
 
   public function plans($user_id) {
-    $user  = User::find($user_id);
-    $plans = Plan::orderBy('name')->get();
+    $user        = User::find($user_id);
+    $plans       = Plan::orderBy('name')->get();
     return ['user' => $user, 'plans' => $plans];
   }
 
@@ -70,9 +71,19 @@ class AdminController extends Controller
     $user = User::find($user_id);
     if ($user) {
       foreach ($user->plans as $plan) {
+        $fecuencia     = '';
+        $frequency_id  = 0;
+        $remaining     = 0;
+        $totalPayments = 0;
+        // Frequency payment
+        $frequency = Frequency::find($plan->frequency_id);
+        if ($frequency) {
+          $frecuencia = $frequency->name;
+          $frequency_id = $frequency->id;
+        }
+        // Payments
         $payments      = Payment::where('plan_user_id', $plan->pivot->id)->get();
         $totalPay      = $plan->price;
-        $totalPayments = 0;
         if ($plan->pivot->agreedPrice) {
           $totalPay = $plan->pivot->agreedPrice;
         }
@@ -81,16 +92,20 @@ class AdminController extends Controller
           $price = str_replace(',', '', $price);
           $totalPayments += $price;
         }
-        // remaining Money
-        $number    = str_replace('$', '', $totalPay);
-        $number    = str_replace(',', '', $number);
-        $remaining = (int)$number - $totalPayments;
-        $remaining = '$'.number_format($remaining, 2,'.', ',');
+        // remaining Money only if frecuency is one pay
+        if ($frequency_id == 1) {
+          $number    = str_replace('$', '', $totalPay);
+          $number    = str_replace(',', '', $number);
+          $remaining = (int)$number - $totalPayments;
+          $remaining = '$'.number_format($remaining, 2,'.', ',');
+        }
         // $formatter = new \NumberFormatter('en_US', NumberFormatter::CURRENCY);
         // $formatter->formatCurrency($totalPayments, 'USD')
         // 'totalPayments' => money_format('$%i', $totalPayments)
         $plans[] = array(
           'id'            => $plan->id,
+          'frecuencia'    => $frecuencia,
+          'frequency_id'  => $frequency_id,
           'name'          => $plan->name,
           'price'         => $plan->price,
           'description'   => $plan->description,
@@ -188,5 +203,10 @@ class AdminController extends Controller
       }
     }
     return ['message' => 'error'];
+  }
+
+  public function frecuencies() {
+    $frecuencies = Frequency::all();
+    return ['frecuencies' => $frecuencies];
   }
 }

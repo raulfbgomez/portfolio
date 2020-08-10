@@ -157,7 +157,7 @@ const Edit = ({ query }) => {
             {plans.map((plan, index) => (
               <ClientItem key={plan.id}>
                 <h2>{ plan.name }</h2>
-                <p>{ plan.price }</p>
+                <p>{ plan.price } / { plan.frecuencia }</p>
                 <div dangerouslySetInnerHTML={{ __html: plan.description }}></div>
 
                 <FormBlockSlim onSubmit={(e) => handleSubmit(e)}>
@@ -220,17 +220,22 @@ const Edit = ({ query }) => {
                       </ul>
                       <ul>
                         <li>
-                          <span>TOTAL A PAGAR: </span>
-                          <span>{ plan.totalPay }</span>
-                        </li>
-                        <li>
                           <span>TOTAL DE PAGOS: </span>
                           <span>{ plan.totalPayments }</span>
                         </li>
-                        <li>
-                          <span>DEBE: </span>
-                          <span>{ plan.remaining }</span>
-                        </li>
+                        {plan.frequency_id == 1 ?
+                          <>
+                            <li>
+                              <span>TOTAL A PAGAR: </span>
+                              <span>{ plan.totalPay }</span>
+                            </li>
+                            <li>
+                              <span>DEBE: </span>
+                              <span>{ plan.remaining }</span>
+                            </li>
+                          </>
+                          : ''
+                        }
                       </ul>
                     </>
                     }
