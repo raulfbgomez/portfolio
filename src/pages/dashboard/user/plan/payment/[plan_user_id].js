@@ -1,15 +1,15 @@
 import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
-import Layout from '../../../../components/dashboard/Layout'
-import { API_URI } from '../../../../utils/variables'
+import Layout from '../../../../../components/dashboard/Layout'
+import { API_URI } from '../../../../../utils/variables'
 import {
   Center,
   FormBlock,
   Message,
   Title,
   Wrapper,
-} from '../../../../styles/dashboard/admin'
+} from '../../../../../styles/dashboard/admin'
 
 const Payment = ({ query }) => {
   
@@ -42,7 +42,7 @@ const Payment = ({ query }) => {
     axios.post(`${API_URI}admin/payment/plan/${query.plan_user_id}`, JSON.stringify(inputs))
       .then(res => {
         if (res.data.message == 'success') {
-          Router.push(`/dashboard/plan/edit/${user.id}`)
+          Router.push(`/dashboard/user/plan/edit/${user.id}`)
         } else if (res.data.message == 'noData') {
           setMessage('Favor de completar todos los campos')
         } else {
@@ -74,7 +74,7 @@ const Payment = ({ query }) => {
             placeholder='Fecha' 
             onChange={handleChange} />
           <div className='buttons'>
-            <Link href={`/dashboard/plan/edit/${user.id}`}>
+            <Link href={`/dashboard/user/plan/edit/${user.id}`}>
               <a>Cancelar</a>
             </Link>
             <button type='submit'><i className='fa fa-save'></i> Guardar</button>

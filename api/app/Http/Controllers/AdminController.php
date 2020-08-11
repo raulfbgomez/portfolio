@@ -33,20 +33,6 @@ class AdminController extends Controller
     return $users;
   }
 
-  public function planStore(Request $request) {
-    $data = json_decode($request->getContent(), true);
-    if (empty($data['name']) && empty($data['price']) && empty($data['description']) && empty($data['frequency_id'])) {
-      return ['message' => 'Empty fields'];
-    }
-    $plan               = new Plan();
-    $plan->frequency_id = $data['frequency_id'];
-    $plan->name         = $data['name'];
-    $plan->price        = $data['price'];
-    $plan->description  = $data['description'];
-    $plan->save();
-    return ['message' => 'success'];
-  }
-
   public function plans($user_id) {
     $user        = User::find($user_id);
     $plans       = Plan::orderBy('name')->get();

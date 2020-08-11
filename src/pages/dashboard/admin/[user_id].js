@@ -55,7 +55,6 @@ const Dashboard = ({ user }) => {
               <option value='name'>Nombre</option>
             </select>
             <input name='search' placeholder='Buscar cliente' />
-            <Link href='/dashboard/admin/newPlan'><Anchor><i className="fa fa-plus"></i>Nuevo plan</Anchor></Link>
           </FormInline>
           <Clients>
             {users.length === 0 ?
@@ -73,15 +72,15 @@ const Dashboard = ({ user }) => {
                               <li>{ plan.name }</li>
                             ))}
                           </ul>
-                          <Link href={`/dashboard/plan/edit/${item.id}`}>
+                          <Link href={`/dashboard/user/plan/edit/${item.id}`}>
                           <Anchor><i className='fa fa-eye'></i> Detalles</Anchor>
                           </Link>
-                          <Link href={`/dashboard/plan/add/${item.id}`}>
+                          <Link href={`/dashboard/user/plan/add/${item.id}`}>
                             <Anchor><i className='fa fa-plus'></i> Agregar plan</Anchor>
                           </Link>
                         </>
                       : 
-                        <Link href={`/dashboard/plan/add/${item.id}`}>
+                        <Link href={`/dashboard/user/plan/add/${item.id}`}>
                           <Anchor><i className='fa fa-plus'></i> Nuevo plan</Anchor>
                         </Link>
                       }

@@ -15,8 +15,7 @@ const Layout = (props) => {
     <Nav>
       <ul>
         <li><Link href='/dashboard/admin/1'><a>Home</a></Link> </li>
-        <li><Link href='/'><a>Planes</a></Link></li>
-        <li><Link href='/'><a>Clientes</a></Link></li>
+        <li><Link href='/dashboard/plan'><a>Planes</a></Link></li>
       </ul>
     </Nav>
     { props.children }

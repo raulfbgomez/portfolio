@@ -37,7 +37,7 @@ const newClient = () => {
     e.preventDefault()
     axios.post(`${API_URI}admin/plan`, JSON.stringify(inputs)).then(response => {
       if (response.data.message == 'success') {
-        Router.push('/dashboard/admin/1')
+        Router.push('/dashboard/plan')
       } else if (response.data.message == 'Empty fields') {
         setMessage('Campos incompletos')
       }
@@ -65,7 +65,7 @@ const newClient = () => {
           </select>
           <textarea placeholder='Descripción' rows='7' onChange={handleChange}></textarea>
           <div className='buttons'>
-            <Link href='/dashboard/admin/1'><a>Cancelar</a></Link>
+            <Link href='/dashboard/plan'><a>Cancelar</a></Link>
             <button type='submit'>Guardar</button>
           </div>
         </FormBlock>

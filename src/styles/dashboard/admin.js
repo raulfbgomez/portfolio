@@ -305,6 +305,21 @@ export const Nav = Styled.nav`
   }
 `
 
+export const Table = Styled.table`
+  border-collapse: collapse;
+  border-spacing: 0;
+  display:table; 
+  table-layout:fixed; 
+  margin: 35px auto;
+  width: 90%;
+  tr th {
+    text-align: left;
+  }
+  tr td {
+    border-bottom: 1px solid gray;
+  }
+`
+
 export const Title = Styled.h1`
   padding: 10px 0;
   text-align: center;

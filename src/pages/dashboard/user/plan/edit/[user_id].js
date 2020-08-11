@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import Router, { useRouter } from 'next/router'
 import axios from 'axios'
-import Layout from '../../../../components/dashboard/Layout'
-import { API_URI } from '../../../../utils/variables'
+import Layout from '../../../../../components/dashboard/Layout'
+import { API_URI } from '../../../../../utils/variables'
 import {
   Anchor,
   Button,
@@ -14,7 +14,7 @@ import {
   Message,
   Wrapper,
   Title
-} from '../../../../styles/dashboard/admin'
+} from '../../../../../styles/dashboard/admin'
 
 const Edit = ({ query }) => {
 
@@ -28,7 +28,7 @@ const Edit = ({ query }) => {
   const [showForm, setShowForm] = React.useState(false)
 
   function getInitialData() {
-    axios.get(`${API_URI}admin/plan/${query.user_id}/edit`)
+    axios.get(`${API_URI}admin/plan/user/${query.user_id}/edit`)
     .then(res => {
       setUser(res.data.user)
       setPlans(res.data.plans)
@@ -38,15 +38,14 @@ const Edit = ({ query }) => {
   React.useEffect(() => {
    getInitialData()
   }, [])
-  // EVITAR REALOAD y si vuelvo a pedir info al server y no recargo ?
+  
   React.useEffect(() => { 
     if (selected) {
       let con = confirm(`Deseas eliminar el plan ${selected.name}`)
       if (con) {
-        axios.post(`${API_URI}admin/plan/${user.id}/remove`, JSON.stringify(selected))
+        axios.post(`${API_URI}admin/plan/user/${user.id}/remove`, JSON.stringify(selected))
           .then(response => {
             if (response.data.message == 'success') {
-              // Router.push(`/dashboard/plan/edit/${user.id}`)
               getInitialData()
             }
           })
@@ -99,7 +98,7 @@ const Edit = ({ query }) => {
   function handleSubmit(evt) {
     evt.preventDefault()
     setShowForm(false)
-    axios.post(`${API_URI}admin/plan/${user.id}/update`, JSON.stringify(plans))
+    axios.post(`${API_URI}admin/plan/user/${user.id}/update`, JSON.stringify(plans))
       .then(res => {
         if (res.data.message == 'success') {
           setMessage({data: 'Cambios guardados correctamente', type: 'success'})
@@ -132,7 +131,7 @@ const Edit = ({ query }) => {
       <Wrapper>
         <Center>
           <Title>Editar plan de { user.name } ({ user.email })</Title>
-          <Link href={`/dashboard/plan/add/${user.id}`}>
+          <Link href={`/dashboard/user/plan/add/${ user.id }`}>
             <Anchor><i className='fa fa-plus'></i> Agregar plan</Anchor>
           </Link>
           <Button 
@@ -239,7 +238,7 @@ const Edit = ({ query }) => {
                       </ul>
                     </>
                     }
-                    <Link href={`/dashboard/plan/payment/${ plan.pivot.id }`}>
+                    <Link href={`/dashboard/user/plan/payment/${ plan.pivot.id }`}>
                         <a><i className='fa fa-plus'></i> Agregar pago</a>
                     </Link>
                   </List>

@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
-import Layout from '../../../../components/dashboard/Layout'
-import { API_URI } from '../../../../utils/variables'
+import Layout from '../../../../../components/dashboard/Layout'
+import { API_URI } from '../../../../../utils/variables'
 import {
   FormBlock,
   Wrapper,
   Title
-} from '../../../../styles/dashboard/admin'
+} from '../../../../../styles/dashboard/admin'
 
 const Add = (data) => {
   
@@ -31,7 +31,7 @@ const Add = (data) => {
     }))
     .then(res => {
       if (res.data.message == 'success') {
-        Router.push(`/dashboard/plan/edit/${data.res.user.id}`)
+        Router.push(`/dashboard/user/plan/edit/${data.res.user.id}`)
       }
     })
     .catch(err => console.log(err))
@@ -63,7 +63,7 @@ const Add = (data) => {
 
 Add.getInitialProps = async (ctx) => {
 
-  const res = await axios.get(`${API_URI}admin/plan/${ctx.query.user_id}`)
+  const res = await axios.get(`${API_URI}admin/plan/user/${ctx.query.user_id}`)
   .catch(err => console.log(err))
   if (res) {
     return {res: res.data}
