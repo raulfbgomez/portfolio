@@ -306,6 +306,7 @@ export const Nav = Styled.nav`
 `
 
 export const Table = Styled.table`
+  background-color: #fff;
   border-collapse: collapse;
   border-spacing: 0;
   display:table; 
@@ -313,10 +314,13 @@ export const Table = Styled.table`
   margin: 35px auto;
   width: 90%;
   tr th {
+    border-bottom: 1px solid gray;
+    padding: 10px;
     text-align: left;
   }
   tr td {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
   }
 `
 

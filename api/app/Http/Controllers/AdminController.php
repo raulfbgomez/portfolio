@@ -56,6 +56,7 @@ class AdminController extends Controller
   public function planEdit($user_id) {
     $user = User::find($user_id);
     if ($user) {
+      $plans = [];
       foreach ($user->plans as $plan) {
         $fecuencia     = '';
         $frequency_id  = 0;
@@ -114,6 +115,7 @@ class AdminController extends Controller
       $data = json_decode($request->getContent(), true);
       $user = User::find($user_id);
       if ($user) {
+        $payments = Payment::where('plan_user_id', $data['id'])->delete();
         $user->plans()->wherePivot('id', $data['id'])->detach($data['plan_id']);
         return ['message' => 'success'];
       }
