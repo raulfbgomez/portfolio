@@ -1,10 +1,17 @@
 import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
-import Layout from '../components/Layout'
-import Nav from '../components/Nav'
-import { Message, ServicesWrapper } from '../styles/ServicesWrapper'
-import { API_URI } from '../utils/variables'
+import Layout from 'components/Layout'
+import Nav from 'components/Nav'
+import { 
+  ButtonBlue,
+  Container, 
+  Form,
+  Message, 
+  Title,
+  Wrapper 
+} from 'styles/Forms'
+import { API_URI } from 'utils/variables'
 
 const Services = () => {
 
@@ -44,19 +51,21 @@ const Services = () => {
     <>
       <Layout title="Raul Bautista Gomez | Sign in">
         <Nav />
-        <ServicesWrapper>
-          <h1>Ingresa para consultar tus proyectos</h1>
-          <form onSubmit={handleSubmit}>
-            {message ?
-              <Message>{ message }</Message>
-            :''
-            }
-            <input type='email' name='email' onChange={handleChange} placeholder='Ingresa tu email' />
-            <input type='password' name='password' onChange={handleChange} placeholder='Ingresa tu contraseña' />
-            <button type='submit'>Iniciar sesión</button>
-            <p>¿No tienes una cuenta? <Link href='/signup'><a>Crear cuenta</a></Link> </p>
-          </form>
-        </ServicesWrapper>
+        <Wrapper>
+          <Container>
+            <Title>Bienvenido de nuevo</Title>
+            <Form onSubmit={handleSubmit}>
+              {message ?
+                <Message>{ message }</Message>
+              : ''
+              }
+              <input type='email' name='email' onChange={handleChange} placeholder='Ingresa tu email' />
+              <input type='password' name='password' onChange={handleChange} placeholder='Ingresa tu contraseña' />
+              <ButtonBlue type='submit'>Iniciar sesión</ButtonBlue>
+              <p>¿No tienes una cuenta? <Link href='/signup'><a>Crear cuenta</a></Link> </p>
+            </Form>
+          </Container>
+        </Wrapper>
       </Layout>
     </>
   )

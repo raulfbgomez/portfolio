@@ -1,10 +1,17 @@
 import Router from 'next/router'
 import Link from 'next/link'
 import axios from 'axios'
-import Layout from '../components/Layout'
-import Nav from '../components/Nav'
-import { Message, ServicesWrapper } from '../styles/ServicesWrapper'
-import { API_URI } from '../utils/variables'
+import Layout from 'components/Layout'
+import Nav from 'components/Nav'
+import { 
+  ButtonBlue,
+  Container,
+  Form,
+  Message, 
+  Title,
+  Wrapper 
+} from 'styles/Forms'
+import { API_URI } from 'utils/variables'
 
 const SignUp = () => {
 
@@ -28,6 +35,8 @@ const SignUp = () => {
     .then((response) => {
       if (response.data.message == 'success') {
         Router.push(`/dashboard/${response.data.user_id}`)
+      } else {
+        setMessage(response.data.message)
       }
     })
     .catch(err => {
@@ -40,20 +49,23 @@ const SignUp = () => {
     <>
       <Layout title="Raul Bautista Gomez | Sign up">
         <Nav />
-        <ServicesWrapper>
-          <h1>Crea una cuenta totalmente gratis</h1>
-          <form onSubmit={handleSubmit}>
-            {message ?
-              <Message>{ message }</Message>
-            :''
-            }
-            <input type='text' name='name' onChange={handleChange} placeholder='Ingresa tu nombre completo' />
-            <input type='email' name='email' onChange={handleChange} placeholder='Ingresa tu email' />
-            <input type='password' name='password' onChange={handleChange} placeholder='Ingresa tu contraseña' />
-            <button type='submit'>Crear cuenta</button>
-            <p>¿Ya tienes una cuenta? <Link href='/signin'><a>Iniciar sesión</a></Link> </p>
-          </form>
-        </ServicesWrapper>
+        <Wrapper>
+          <Container>
+            <Title>Crea una cuenta totalmente gratis</Title>
+            <Form onSubmit={handleSubmit}>
+              {message ?
+                <Message>{ message }</Message>
+              :''
+              }
+              <input type='text' name='name' onChange={handleChange} placeholder='Ingresa tu nombre completo' />
+              <input type='email' name='email' onChange={handleChange} placeholder='Ingresa tu email' />
+              <input type='password' name='password' onChange={handleChange} placeholder='Ingresa tu contraseña' />
+              <ButtonBlue type='submit'>Crear cuenta</ButtonBlue>
+              <p>¿Ya tienes una cuenta? <Link href='/signin'><a>Iniciar sesión</a></Link> </p>
+            </Form>
+
+          </Container>
+        </Wrapper>
       </Layout>
     </>
   )

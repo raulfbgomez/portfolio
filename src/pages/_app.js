@@ -19,8 +19,18 @@ const GlobalStyle = createGlobalStyle`
 const theme = {
   colors: {
     primary: '#0070f3',
-    secondary: '#67a32b'
+    secondary: '#67a32b',
+    background: '#f6f6f5',
+    text: '#2d2d2d',
+    blue: '#0052d0',
+    gray: '#313131',
+    green: '#03e07c'
   },
+  breakpoints: {
+    mobile: '599px',
+    desktop: '1200px',
+    bigDesktop: '1800px',
+  }
 }
 
 export default class MyApp extends App {
