@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: 'Spartan', sans-serif;
-    color: '#566370';
+    color: '#2d2d2d';
   }
 `
 
@@ -20,7 +20,7 @@ const theme = {
   colors: {
     primary: '#0070f3',
     secondary: '#67a32b',
-    background: '#f6f6f5',
+    background: '#f5f7fc', // f6f6f5
     text: '#2d2d2d',
     blue: '#0052d0',
     gray: '#313131',

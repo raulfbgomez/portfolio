@@ -10,4 +10,8 @@ class Plan extends Model {
     return $this->belongsToMany('App\User');
   }
 
+  public function frequency() {
+    return $this->belongsTo('App\Frequency');
+  }
+
 }

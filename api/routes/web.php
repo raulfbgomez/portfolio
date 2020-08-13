@@ -42,3 +42,8 @@ $router->group(['prefix' => 'admin'], function () use ($router) {
    // Frecuencies
    $router->get('frecuencies', 'AdminController@frecuencies');
 });
+
+$router->group(['prefix' => 'user'], function () use ($router) {
+   $router->get('{user_id}/data', 'UserController@home');
+   $router->get('{user_id}/plans', 'UserController@plans');
+});

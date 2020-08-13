@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
+import { API_URI } from 'utils/variables'
 import Layout from 'components/Layout'
 import Nav from 'components/Nav'
 import { 
@@ -11,16 +12,15 @@ import {
   Title,
   Wrapper 
 } from 'styles/Forms'
-import { API_URI } from 'utils/variables'
+
 
 const Services = () => {
 
+  const [message, setMessage] = React.useState('')
   const [inputs, setInputs] = React.useState({
     email: '',
     password: ''
   });
-
-  const [message, setMessage] = React.useState('')
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -31,12 +31,16 @@ const Services = () => {
     e.preventDefault()
     setMessage('Validando...')
     axios.post(`${API_URI}auth/signin`, JSON.stringify(inputs))
-    .then((response) => {
+    .then(async (response) => {
       if (response.data.message == 'success') {
+        localStorage.setItem('rbgUserId', response.data.user_id)
+        let user = await axios.get(`${ API_URI }user/${ response.data.user_id }/data`)
+          .then(res => (res.data))
+          .catch(err => console.log(err))
         if (response.data.is_admin == 1) {
           Router.push(`/dashboard/admin/${response.data.user_id}`)
         } else {
-          Router.push(`/dashboard/${response.data.user_id}`)
+          Router.push(`/home`)
         }
       }
       setMessage(response.data.message)

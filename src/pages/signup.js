@@ -34,7 +34,8 @@ const SignUp = () => {
     axios.post(`${API_URI}auth/signup`, JSON.stringify(inputs))
     .then((response) => {
       if (response.data.message == 'success') {
-        Router.push(`/dashboard/${response.data.user_id}`)
+        localStorage.setItem('rbgUserId', response.data.user_id)
+        Router.push(`/home`)
       } else {
         setMessage(response.data.message)
       }
