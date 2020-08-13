@@ -1,6 +1,8 @@
+import { useContext } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
+import { UserContext } from 'context/UserContext'
 import { API_URI } from 'utils/variables'
 import Layout from 'components/Layout'
 import Nav from 'components/Nav'
@@ -13,11 +15,11 @@ import {
   Wrapper 
 } from 'styles/Forms'
 
-
 const Services = () => {
 
+  const { login }             = useContext(UserContext)
   const [message, setMessage] = React.useState('')
-  const [inputs, setInputs] = React.useState({
+  const [inputs, setInputs]   = React.useState({
     email: '',
     password: ''
   });
@@ -29,14 +31,12 @@ const Services = () => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    setMessage('Validando...')
+    setMessage('Validando información...')
     axios.post(`${API_URI}auth/signin`, JSON.stringify(inputs))
     .then(async (response) => {
       if (response.data.message == 'success') {
-        localStorage.setItem('rbgUserId', response.data.user_id)
-        let user = await axios.get(`${ API_URI }user/${ response.data.user_id }/data`)
-          .then(res => (res.data))
-          .catch(err => console.log(err))
+        localStorage.setItem('rbg_userId', response.data.user_id)
+        await login(response.data.user_id)
         if (response.data.is_admin == 1) {
           Router.push(`/dashboard/admin/${response.data.user_id}`)
         } else {

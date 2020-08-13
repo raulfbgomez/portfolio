@@ -1,6 +1,8 @@
+import { useContext, useEffect } from 'react'
 import Link from 'next/link'
-import axios from 'axios'
+import { UserContext } from 'context/UserContext'
 import Layout from 'components/user/Layout'
+import Plan from 'components/user/Plan'
 import { API_URI } from 'utils/variables'
 import {
   Anchor,
@@ -9,9 +11,16 @@ import {
 } from 'styles/user/User'
 
 const Home = () => {
-  let user = []
-  let plans = []
 
+  const { user, getUser, plans, getPlans } = useContext(UserContext)
+
+  useEffect(() => {
+    if (!user) {
+      getUser()
+    }
+    getPlans(user)
+  }, [])
+  
   return (
     <Layout title='Bienvenido'>
       <WelcomeText>Hola { user && user.name } </WelcomeText>
@@ -22,7 +31,7 @@ const Home = () => {
         <NoPlans>
           <p>No tienes planes contratados</p>
           <Link href='/home/plans'>
-            <Anchor><i className="fa fa-file-text" aria-hidden="true"></i> Contratar</Anchor>
+            <Anchor><i className="fa fa-eye" aria-hidden="true"></i> Ver planes</Anchor>
           </Link>
         </NoPlans>
       }

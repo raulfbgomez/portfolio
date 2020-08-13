@@ -29,8 +29,9 @@ export const NoPlans = Styled.div`
 `
 
 export const WelcomeText = Styled.p`
-  color: ${ props => props.theme.colors.text };
-  font-size: 1em;
-  padding-top: 20px;
+  color: ${ props => props.theme.colors.primary };
+  font-size: 1.1em;
+  padding: 20px 0 15px;
+  margin: 0;
   text-align: center;
 `

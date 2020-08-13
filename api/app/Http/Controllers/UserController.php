@@ -43,4 +43,31 @@ class UserController extends Controller
     }
   }
 
+  public function plan($user_id, $plan_user_id) {
+    if ($user_id) {
+      $user = User::find($user_id);
+      if ($user) {
+        $plan = $user->plans()->wherePivot('id', $plan_user_id)->first();
+        if ($plan) {
+          $payments = \App\Payment::where('plan_user_id', $plan_user_id)->get();
+          $plan->load('frequency');
+          $data = array(
+            'id'          => $plan->id,
+            'name'        => $plan->name,
+            'price'       => $plan->price,
+            'description' => $plan->description,
+            'frequency'   => $plan->frequency,
+            'url_test'    => $plan->pivot->url_test,
+            'url_prod'    => $plan->pivot->url_prod,
+            'agreedPrice' => $plan->pivot->agreedPrice,
+            'delivery'    => $plan->pivot->delivery,
+            'paymentDate' => $plan->pivot->paymentDate,
+            'payments'    => $payments
+          );
+          return $data;
+        }
+      }
+    }
+  }
+
 }

@@ -46,4 +46,5 @@ $router->group(['prefix' => 'admin'], function () use ($router) {
 $router->group(['prefix' => 'user'], function () use ($router) {
    $router->get('{user_id}/data', 'UserController@home');
    $router->get('{user_id}/plans', 'UserController@plans');
+   $router->get('{user_id}/plan/{plan_user_id}', 'UserController@plan');
 });

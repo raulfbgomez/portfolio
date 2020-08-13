@@ -1,6 +1,8 @@
+import { useContext } from 'react'
 import Router from 'next/router'
 import Link from 'next/link'
 import axios from 'axios'
+import { UserContext } from 'context/UserContext'
 import Layout from 'components/Layout'
 import Nav from 'components/Nav'
 import { 
@@ -15,13 +17,14 @@ import { API_URI } from 'utils/variables'
 
 const SignUp = () => {
 
-  const [inputs, setInputs] = React.useState({
+  const { login }             = useContext(UserContext)
+  const [message, setMessage] = React.useState('')
+  const [inputs, setInputs]   = React.useState({
     name: '',
     email: '',
     password: ''
   });
 
-  const [message, setMessage] = React.useState('')
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -32,9 +35,10 @@ const SignUp = () => {
     e.preventDefault()
     setMessage('Validando...')
     axios.post(`${API_URI}auth/signup`, JSON.stringify(inputs))
-    .then((response) => {
+    .then(async (response) => {
       if (response.data.message == 'success') {
-        localStorage.setItem('rbgUserId', response.data.user_id)
+        localStorage.setItem('rbg_userId', response.data.user_id)
+        await login(response.data.user_id)
         Router.push(`/home`)
       } else {
         setMessage(response.data.message)
