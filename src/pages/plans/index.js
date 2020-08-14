@@ -1,6 +1,8 @@
+import axios from 'axios'
 import Styled from 'styled-components'
 import Layout from 'components/user/Layout'
 import bg from 'public/plans.jpg'
+import { API_URI } from 'utils/variables'
 
 const Anchor =Styled.a`
   border: 1px solid ${ props => props.theme.colors.secondary };
@@ -76,6 +78,12 @@ const Title = Styled.h1`
 `
 
 const Plans = () => {
+  const [plans, setPlans] = React.useState([])
+  React.useEffect(() => {
+    axios.get(`${ API_URI }plan`)
+      .then(res => setPlans(res.data))
+      .catch(err => console.log(err))
+  }, [])
   return (
     <Layout title='Planes'>
       <PlansHeader>
@@ -87,63 +95,18 @@ const Plans = () => {
             <li>Certificado SSL Wildcard</li>
             <li>Soporte</li>
           </ul>
-          <p>Planes desde Desde $5,900 MX</p>
+          <p>Planes desde Desde $6,500 MX</p>
         </BgBlack>
       </PlansHeader>
       <PlansContent>
-        <PlansItem>
-          <Subtitle>Plan Web</Subtitle>
-          <p>Tu página web o proyecto desde cero.</p>
-          <PlanPrice>$6,500 MX</PlanPrice>
-          <ul>
-            <li>Diseño de hasta cinco apartados</li>
-            <li>Página web que se adapta a dispositivos mobiles</li>
-            <li>Una cuenta de correo gratis (solo reenvio de emails)</li>
-          </ul>
-          <Anchor><i className='fa fa-handshake-o' aria-hidden='true'></i> Lo quiero</Anchor>
-        </PlansItem>
-        <PlansItem>
-          <Subtitle>Plan Avanzado</Subtitle>
-          <p>Tu página web o proyecto con administración.</p>
-          <PlanPrice>$9,900 MX</PlanPrice>
-          <ul>
-            <li>Diseño de hasta diez apartados</li>
-            <li>Página web que se adapta a dispositivos mobiles</li>
-            <li>Diseño de base de datos (hasta 1 GB)</li>
-            <li>Login y registro seguro</li>
-            <li>Ideal para las empresas que buscan más que solo una página, ya que se crea un sistema para resolver sus necesidades</li>
-            <li>Cinco cuentas de correo gratis (con 2 GB de almacenamiento)</li>
-          </ul>
-          <Anchor><i className='fa fa-handshake-o' aria-hidden='true'></i> Lo quiero</Anchor>
-        </PlansItem>
-        <PlansItem>
-          <Subtitle>Email Basic</Subtitle>
-          <p>Tu cuenta de correo personalizada</p>
-          <PlanPrice>$1,060 MX despues,</PlanPrice>
-          <PlanPrice>despues $70 al mes</PlanPrice>
-          <ul>
-            <li>Hasta 15 cuentas de correo electrónico</li>
-            <li>Buzón de 2 GB para almacenar tus correos</li>
-            <li>Almacena hasta 10, 000 emails aproximadamente</li>
-            <li>Protección antispam</li>
-          </ul>
-          <Anchor><i className='fa fa-handshake-o' aria-hidden='true'></i> Lo quiero</Anchor>
-        </PlansItem>
-        <PlansItem>
-          <Subtitle>Email Bussiness</Subtitle>
-          <p>Tu cuenta de correo personalizada para empresas</p>
-          <PlanPrice>$1,060 MX despues,</PlanPrice>
-          <PlanPrice>1 usuario / $100 al mes</PlanPrice>
-          <PlanPrice>5 usuarios / $400 al mes</PlanPrice>
-          <PlanPrice>10 usuarios / $650 al mes</PlanPrice>
-          <ul>
-            <li>Cada cuenta de correo electrónico cuenta con:</li>
-            <li>Buzón de 50 GB para almecenar tus correos</li>
-            <li>Almacena hasta 500,000 emails aproximadamente</li>
-            <li>Protección antivirus y antispam</li>
-          </ul>
-          <Anchor><i className='fa fa-handshake-o' aria-hidden='true'></i> Lo quiero</Anchor>
-        </PlansItem>
+        {plans.map(plan => (
+          <PlansItem>
+            <Subtitle>{ plan.name }</Subtitle>
+            <PlanPrice>{ plan.price }</PlanPrice>
+            <div dangerouslySetInnerHTML={{ __html: plan.description }}></div>
+            <Anchor><i className='fa fa-handshake-o' aria-hidden='true'></i> Lo quiero</Anchor>
+          </PlansItem>
+        ))}
         <PlansItem>
           <Subtitle>Tu traje a la medida</Subtitle>
           <p>Necesitas algo mas complejo</p>

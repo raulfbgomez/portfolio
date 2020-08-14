@@ -48,3 +48,7 @@ $router->group(['prefix' => 'user'], function () use ($router) {
    $router->get('{user_id}/plans', 'UserController@plans');
    $router->get('{user_id}/plan/{plan_user_id}', 'UserController@plan');
 });
+// plans without login on the app
+$router->group(['prefix' => 'plan'], function () use ($router) {
+   $router->get('/', 'PlanController@index');
+});

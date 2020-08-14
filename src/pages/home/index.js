@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { UserContext } from 'context/UserContext'
 import Layout from 'components/user/Layout'
 import Plan from 'components/user/Plan'
-import { API_URI } from 'utils/variables'
 import {
   Anchor,
   NoPlans,
