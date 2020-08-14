@@ -11,17 +11,17 @@ export const Menu = Styled.nav`
   position: sticky;
   width: 100%;
   button {
-   border: 1px solid crimson;
-   background-color: crimson;
-   border-radius: 10px;
-   color: #fff;
-   padding: 7px 9px;
-   transition: .3s;
-   &:hover {
-    box-shadow: 0px 5px 8px #888888;
-    cursor: pointer;
-    transform: translateY(-4px);
-   }
+    border: 1px solid crimson;
+    background-color: crimson;
+    border-radius: 10px;
+    color: #fff;
+    padding: 7px 9px;
+    transition: .3s;
+    &:hover {
+      box-shadow: 0px 5px 8px #888888;
+      cursor: pointer;
+      transform: translateY(-4px);
+  }
   }
   ul {
     margin: 0;
@@ -64,7 +64,7 @@ const Nav = () => {
       <ul>
         <li>
           <Link href='/home'><a><i className='fa fa-home'></i> Home</a></Link>
-          <Link href='/home'><a><i className='fa fa-file-text'></i> Contratar</a></Link>
+          <Link href='/plans'><a><i className='fa fa-file-text'></i> Contratar</a></Link>
           <Link href='/home'><a><i className='fa fa-file-fa fa-user-circle'></i> Perfil</a></Link>
         </li>
       </ul>

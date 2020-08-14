@@ -30,7 +30,7 @@ const Home = () => {
       {plans.length == 0 &&
         <NoPlans>
           <p>No tienes planes contratados</p>
-          <Link href='/home/plans'>
+          <Link href='/plans'>
             <Anchor><i className="fa fa-eye" aria-hidden="true"></i> Ver planes</Anchor>
           </Link>
         </NoPlans>
