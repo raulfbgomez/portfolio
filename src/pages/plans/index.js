@@ -32,6 +32,9 @@ const BgBlack = Styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+  ul li, p {
+    font-size: 1.2em;
+  }
 `
 
 const PlansContent = Styled.div`
@@ -56,8 +59,12 @@ const PlansItem = Styled.div`
   box-shadow: 0px 8px 28px -15px rgba(0, 0, 0, 0.75);
   border-radius: 10px;
   margin: 24px auto;
-  padding: 10px 15px;
+  padding: 15px 15px;
   width: 80%;
+  ul li {
+    line-height: 1.2em;
+    padding-top: 7px;
+  }
 `
 
 const PlanPrice = Styled.p`
@@ -84,6 +91,7 @@ const Plans = () => {
       .then(res => setPlans(res.data))
       .catch(err => console.log(err))
   }, [])
+
   return (
     <Layout title='Planes'>
       <PlansHeader>
