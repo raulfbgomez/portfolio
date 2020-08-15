@@ -25,13 +25,17 @@ export const NoPlans = Styled.div`
   p {
     color: ${ props => props.theme.colors.secondary };
   }
+`
 
+export const Text = Styled.p`
+  text-align: center;
+  font-size: 1em;
 `
 
 export const WelcomeText = Styled.p`
   color: ${ props => props.theme.colors.primary };
   font-size: 1.1em;
-  padding: 20px 0 15px;
+  padding: 20px 0 0px;
   margin: 0;
   text-align: center;
 `

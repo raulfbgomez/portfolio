@@ -6,6 +6,7 @@ import Plan from 'components/user/Plan'
 import {
   Anchor,
   NoPlans,
+  Text,
   WelcomeText
 } from 'styles/user/User'
 
@@ -22,7 +23,8 @@ const Home = () => {
   
   return (
     <Layout title='Bienvenido'>
-      <WelcomeText>Hola { user && user.name } </WelcomeText>
+      <WelcomeText>Hola, { user && user.name } </WelcomeText>
+      <Text>Estos son tus planes contratados</Text>
       {plans.map(plan => (
         <Plan key={ plan.id } plan={ plan } />
       ))}

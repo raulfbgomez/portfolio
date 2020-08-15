@@ -15,6 +15,7 @@ export const Menu = Styled.nav`
     background-color: crimson;
     border-radius: 10px;
     color: #fff;
+    outline: none;
     padding: 7px 9px;
     transition: .3s;
     &:hover {

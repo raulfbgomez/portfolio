@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import axios from 'axios'
 import Styled from 'styled-components'
 import Layout from 'components/user/Layout'
@@ -38,7 +39,9 @@ const BgBlack = Styled.div`
 `
 
 const PlansContent = Styled.div`
-  background-color: ${ props => props.theme.colors.background };
+  /* background-color: ${ props => props.theme.colors.background }; */
+  background-color: #8BC6EC;
+  background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
   padding: 10px 0;
 `
 
@@ -112,7 +115,9 @@ const Plans = () => {
             <Subtitle>{ plan.name }</Subtitle>
             <PlanPrice>{ plan.price }</PlanPrice>
             <div dangerouslySetInnerHTML={{ __html: plan.description }}></div>
-            <Anchor><i className='fa fa-handshake-o' aria-hidden='true'></i> Lo quiero</Anchor>
+            <Link href={`plans/add/${ plan.id }`}>
+              <Anchor><i className='fa fa-handshake-o' aria-hidden='true'></i> Lo quiero</Anchor>
+            </Link>
           </PlansItem>
         ))}
         <PlansItem>

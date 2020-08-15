@@ -47,6 +47,7 @@ class UserController extends Controller
     if ($user_id) {
       $user = User::find($user_id);
       if ($user) {
+        $data = [];
         $plan = $user->plans()->wherePivot('id', $plan_user_id)->first();
         if ($plan) {
           $payments = \App\Payment::where('plan_user_id', $plan_user_id)->get();
@@ -64,10 +65,21 @@ class UserController extends Controller
             'paymentDate' => $plan->pivot->paymentDate,
             'payments'    => $payments
           );
-          return $data;
         }
+        return $data;
       }
     }
+  }
+
+  public function store($user_id, $plan_id) {
+    if (!empty($user_id) && !empty($plan_id)) {
+      $user = User::find($user_id);
+      $user->plans()->attach(
+        $plan_id
+      );
+      return ['message' => 'success'];
+    }
+    return ['message' => 'empty fields'];
   }
 
 }

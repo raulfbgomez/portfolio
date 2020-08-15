@@ -11,7 +11,7 @@ function UserProvider({ children }) {
   let [plans, setPlans]   = useState([])
 
   async function getUser() {
-    let userId = localStorage.getItem('rbg_userId');
+    let userId = localStorage.getItem('rbg_userId')
     if (userId) {
       if (!user) {
         let res = await axios.get(`${ API_URI }user/${ userId }/data`)
@@ -24,13 +24,14 @@ function UserProvider({ children }) {
     }
   }
 
-  async function login(user_id) {
+  async function login() {
     await getUser()
   }
 
   function logout() {
     setUser(null)
     setPlans([])
+    localStorage.removeItem('rbg_userId')
     Router.push('/signin')
   }
 

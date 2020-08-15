@@ -44,7 +44,6 @@ class AdminController extends Controller
     if (empty($data['user_id'])) {
       return ['message' => 'user not found'];
     } else {
-      $dt   = new \DateTime();
       $user = User::find($data['user_id']);
       $user->plans()->attach(
         $data['plans']
