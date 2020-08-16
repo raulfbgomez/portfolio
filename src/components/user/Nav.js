@@ -65,7 +65,7 @@ const Nav = () => {
       <ul>
         <li>
           <Link href='/home'><a><i className='fa fa-home'></i> Home</a></Link>
-          <Link href='/plans'><a><i className='fa fa-file-text'></i> Contratar</a></Link>
+          <Link href='/plans'><a><i className='fa fa-star'></i> Planes</a></Link>
           <Link href='/home'><a><i className='fa fa-file-fa fa-user-circle'></i> Perfil</a></Link>
         </li>
       </ul>

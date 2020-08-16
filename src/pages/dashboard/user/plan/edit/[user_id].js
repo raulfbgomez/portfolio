@@ -162,7 +162,6 @@ const Edit = ({ query }) => {
                 : <p><strong>No hay archivo de requerimientos</strong></p>
                 }
 
-
                 <FormBlockSlim onSubmit={(e) => handleSubmit(e)}>
                   {showForm ?
                   <>

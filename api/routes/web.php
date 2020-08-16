@@ -54,7 +54,10 @@ $router->group(['prefix' => 'plan'], function () use ($router) {
    $router->get('/', 'PlanController@index');
 });
 // Word document with requirements
-$router->get('document/download', function () {
-   return response()->download('template.docx');
+$router->get('document/plan/download', function () {
+   return response()->download('PlanTemplate.docx');
+});
+$router->get('document/email/download', function () {
+   return response()->download('EmailTemplate.docx');
 });
 $router->post('document/upload/{user_id}/{plan_id}', 'UserController@uploadFile');
