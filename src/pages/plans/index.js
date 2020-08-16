@@ -2,7 +2,6 @@ import Link from 'next/link'
 import axios from 'axios'
 import Styled from 'styled-components'
 import Layout from 'components/user/Layout'
-import bg from 'public/plans.jpg'
 import { API_URI } from 'utils/variables'
 
 const Anchor =Styled.a`
@@ -47,7 +46,7 @@ const PlansContent = Styled.div`
 
 
 const PlansHeader = Styled.div`
-  background: url(${ bg }) no-repeat center center fixed; 
+  background: url('/plans.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import {HeaderStyle, ContainerStyle, TextosStyle, ImageStyle, WaveStyle} from '../styles/Header'
 import Nav from './Nav'
-import Svg from '../svgs/Wave.svg'
 import Svg2 from '../svgs/Wave2.svg'
 
 const Cabecera = () => {
@@ -10,7 +9,7 @@ const Cabecera = () => {
     <HeaderStyle>
       <Nav />
       <ContainerStyle>
-        <ImageStyle src={require('../public/image.png')} alt="image" />
+        <ImageStyle src={require('../../public/image.png')} alt="image" />
         <TextosStyle>
           <h1>Raul Bautista Gomez</h1>
           <h2>Web Developer</h2>

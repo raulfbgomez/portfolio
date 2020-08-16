@@ -1,5 +1,4 @@
 import Styled from 'styled-components'
-import bg from '../public/bg.jpg'
 
 export const CardExperience = Styled.div`
   display: block;
@@ -52,7 +51,7 @@ export const CardExperience = Styled.div`
 `
 
 export const ExperienceStyle = Styled.div`
-  background: url(${bg}) no-repeat center center fixed; 
+  background: url('/bg.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

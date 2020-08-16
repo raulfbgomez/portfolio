@@ -1,5 +1,5 @@
 import Styled from 'styled-components'
-import defaultImage from '../public/image.png'
+// import defaultImage from '/public/image.png'
 
 // background: url(${Person}) no-repeat;
 // background: url(${props => props.image || defaultImage}) no-repeat;
@@ -38,7 +38,7 @@ export const CardContent = Styled.div`
 `
 
 export const CardImage = Styled.div`
-  background: url(${props => props.image || defaultImage}) no-repeat;
+  background: url(${props => props.image || '/image.png'}) no-repeat;
   background-size:100% 100%;
   border-radius: 10px 0 0 10px;
   width: 400px;

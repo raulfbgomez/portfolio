@@ -2,8 +2,8 @@ import { Title, Hr } from '../styles/Components'
 import { Container } from '../styles/Projects'
 import CardComponent from './CardComponent'
 
-import podcast from '../public/podcast.png'
-import vueMusic from '../public/vueMusic.png'
+import podcast from '../../public/podcast.png'
+import vueMusic from '../../public/vueMusic.png'
 
 const Projects = () => (
   <Container>
