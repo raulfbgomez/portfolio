@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Styled from 'styled-components'
 
 const Anchor = Styled.a`
@@ -7,13 +8,15 @@ const Anchor = Styled.a`
   color: #fff;
   display: block;
   font-size: 1em;
-  margin: 0 auto;
-  padding: 12px 5px;
+  margin: 7px auto;
+  padding: 8px 3px;
   text-decoration: none;
   text-align: center;
   width: 200px;
   &:hover {
     background-color: ${ props => props.theme.colors.primary };
+    border: 1px solid ${ props => props.theme.colors.primary };
+    cursor: pointer;
   }
   i {
     font-size: 1.7em;
@@ -34,7 +37,7 @@ const Data = Styled.span`
 
 const Payments = Styled.div`
   display: block;
-  margin: 0 auto;
+  margin: 15px auto;
   width: 94%;
   p:first-child {
     margin-top: 30px;
@@ -62,8 +65,9 @@ const Plan = Styled.div`
   background-color: ${ props => props.theme.colors.primary };
   background-image: linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
   border-radius: 10px;
-  box-shadow: 0px 10px 15px -10px rgba(0,0,0,0.75);
+  box-shadow: 0px 10px 15px -10px rgba(0, 0, 0, 0.75);
   display: inline-block;
+  font-size: 1em;
   margin: 10px auto;
   padding: 10px 0;
   width: 94%;
@@ -71,6 +75,9 @@ const Plan = Styled.div`
     color: #f0f7ff;
     padding: 0px 10px;
     margin: 10px 0 0;
+  }
+  ul li {
+    padding: 4px 0;
   }
 `
 
@@ -96,7 +103,6 @@ export default function Detail( { plan } ) {
           <p dangerouslySetInnerHTML={{ __html: plan.description }}></p>
         </Plan>
       </Center>
-
       <Center>
         <Plan>
         { plan.paymentDate &&
@@ -132,6 +138,11 @@ export default function Detail( { plan } ) {
             <p>URL del proyecto</p>
             <Data><a href={ plan.url_prod } target='_blank'>Consultar Proyecto</a></Data>
           </>
+          }
+          {plan.file == '' || plan.file == null &&
+            <Link href={`/home/plan/upload/${ plan.id }`}>
+              <Anchor><i className='fa fa-file-word-o' aria-hidden='true'></i> Subir archivo</Anchor>
+            </Link>
           }
         </Plan>
       </Center>

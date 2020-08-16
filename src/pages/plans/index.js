@@ -54,7 +54,7 @@ const PlansHeader = Styled.div`
   background-size: cover;
   color : #fff;
   height: 90vh;
-  width: 100vw;
+  width: 100%;
 `
 
 const PlansItem = Styled.div`

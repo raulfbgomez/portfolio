@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Router, { useRouter } from 'next/router'
 import axios from 'axios'
 import Layout from '../../../../../components/dashboard/Layout'
 import { API_URI } from '../../../../../utils/variables'
@@ -158,6 +157,11 @@ const Edit = ({ query }) => {
                 <h2>{ plan.name }</h2>
                 <p>{ plan.price } / { plan.frecuencia }</p>
                 <div dangerouslySetInnerHTML={{ __html: plan.description }}></div>
+                {plan.pivot.file ?
+                  <Anchor href={`${API_URI}${ plan.pivot.file }`} download><i className='fa fa-file-word-o' aria-hidden='true'></i> Requerimientos</Anchor>
+                : <p><strong>No hay archivo de requerimientos</strong></p>
+                }
+
 
                 <FormBlockSlim onSubmit={(e) => handleSubmit(e)}>
                   {showForm ?

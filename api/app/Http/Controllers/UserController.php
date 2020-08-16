@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -63,6 +64,7 @@ class UserController extends Controller
             'agreedPrice' => $plan->pivot->agreedPrice,
             'delivery'    => $plan->pivot->delivery,
             'paymentDate' => $plan->pivot->paymentDate,
+            'file'        => $plan->pivot->file,
             'payments'    => $payments
           );
         }
@@ -80,6 +82,26 @@ class UserController extends Controller
       return ['message' => 'success'];
     }
     return ['message' => 'empty fields'];
+  }
+
+  public function uploadFile(Request $request, $user_id, $plan_id) {
+    if ($request->file('document')->isValid()) {
+      $extension = $request->document->extension();
+      if ($extension == 'docx') {
+        $user = User::find($user_id);
+        if ($user) {
+          $fileName = 'user_'.$user_id.'_plan_'.$plan_id.'.'.$extension;
+          $request->file('document')->move('documents/', $fileName);
+          $user->plans()->updateExistingPivot($plan_id, [
+            'file'=> 'documents/'.$fileName
+          ]);
+          return ['message' => 'success'];
+        }
+        return ['message' => 'error'];
+      }
+      return ['message' => 'invalid extension'];
+    }
+    return ['message' => 'error'];
   }
 
 }

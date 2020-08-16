@@ -1,14 +1,8 @@
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
 import axios from 'axios'
 import Layout from 'components/user/Layout'
 import { API_URI } from 'utils/variables'
 import PlanDetail from 'components/user/PlanDetail'
-import {
-  Anchor,
-  NoPlans,
-  WelcomeText
-} from 'styles/user/User'
 
 const Plan = ({ query }) => {
 

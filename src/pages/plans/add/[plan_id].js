@@ -97,13 +97,9 @@ const Add = ({ query }) => {
     axios.post(`${ API_URI }user/${ user.id }/plan/${ plan.id }`)
       .then(res => {
         if (res.data.message == 'success') {
-          setTimeout(() => {
-            setMessage('PLAN AGREGADO')
-            setIcon('fa fa-check')
-            setTimeout(() => {
-              Router.push('/home')
-            },400)
-          }, 300)
+          setMessage('PLAN AGREGADO')
+          setIcon('fa fa-check')
+          Router.push(`/plans/description`)
         }
       })
       .catch(err => console.log(err))
