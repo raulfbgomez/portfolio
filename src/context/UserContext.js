@@ -24,6 +24,16 @@ function UserProvider({ children }) {
     }
   }
 
+  async function updateUser() {
+    let userId = localStorage.getItem('rbg_userId')
+    if (userId) {
+      let res = await axios.get(`${ API_URI }user/${ userId }/data`)
+        .then(res => (res.data))
+        .catch(err => console.log(err))
+      setUser(res)
+    }
+  }
+
   async function login() {
     await getUser()
   }
@@ -48,7 +58,7 @@ function UserProvider({ children }) {
   }
 
   return (
-    <Provider value={{ user, getUser, login, logout, plans, getPlans }}>
+    <Provider value={{ user, getUser, updateUser, login, logout, plans, getPlans }}>
       { children }
     </Provider>
   )

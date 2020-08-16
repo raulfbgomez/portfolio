@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -100,6 +101,27 @@ class UserController extends Controller
         return ['message' => 'error'];
       }
       return ['message' => 'invalid extension'];
+    }
+    return ['message' => 'error'];
+  }
+
+  public function update(Request $request, $user_id) {
+    if ($user_id) {
+      $data = json_decode($request->getContent(), true);
+      $user = User::find($user_id);
+      if ($user) {
+        if (!empty($data['name'])) {
+          $user->name = $data['name'];
+        }
+        if (!empty($data['email'])) {
+          $user->email = $data['email'];
+        }
+        if (!empty($data['password'])) {
+          $user->password = Hash::make($data['password']);
+        }
+        $user->save();
+        return ['message' => 'success'];
+      }
     }
     return ['message' => 'error'];
   }

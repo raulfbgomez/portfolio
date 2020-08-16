@@ -66,7 +66,7 @@ const Nav = () => {
         <li>
           <Link href='/home'><a><i className='fa fa-home'></i> Home</a></Link>
           <Link href='/plans'><a><i className='fa fa-star'></i> Planes</a></Link>
-          <Link href='/home'><a><i className='fa fa-file-fa fa-user-circle'></i> Perfil</a></Link>
+          <Link href='/profile'><a><i className='fa fa-file-fa fa-user-circle'></i> Perfil</a></Link>
         </li>
       </ul>
       <button onClick={ handleClick }><i className='fa fa-sign-out'></i></button>

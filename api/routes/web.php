@@ -48,6 +48,7 @@ $router->group(['prefix' => 'user'], function () use ($router) {
    $router->get('{user_id}/plans', 'UserController@plans');
    $router->get('{user_id}/plan/{plan_user_id}', 'UserController@plan'); // show a specific plan
    $router->post('{user_id}/plan/{plan_id}', 'UserController@store'); // new plan by customer
+   $router->post('{user_id}/update', 'UserController@update');
 });
 // plans without login on the app
 $router->group(['prefix' => 'plan'], function () use ($router) {
