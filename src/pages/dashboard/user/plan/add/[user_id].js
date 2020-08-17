@@ -24,14 +24,13 @@ const Add = (data) => {
 
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(plans)
     axios.post(`${API_URI}admin/plan/user`, JSON.stringify({
       plans: plans,
       user_id: data.res.user.id
     }))
     .then(res => {
       if (res.data.message == 'success') {
-        Router.push(`/dashboard/user/plan/edit/${data.res.user.id}`)
+        Router.push(`/dashboard/user/plan/edit/${ data.res.user.id }`)
       }
     })
     .catch(err => console.log(err))
@@ -40,15 +39,15 @@ const Add = (data) => {
   return (
     <Layout title='Administración'>
       <Wrapper>
-        <Title>Agregar un nuevo plan para { data.res.user.name }</Title>
-        <FormBlock onSubmit={handleSubmit}>
-          {data.res.plans.map(plan => (
+        <Title>Agregar un nuevo plan para { data.res && data.res.user.name }</Title>
+        <FormBlock onSubmit={ handleSubmit }>
+          { data.res && data.res.plans.map(plan => (
             <label key={plan.id}>
               <span>{ plan.name } <br /> { plan.price }</span>
               <span dangerouslySetInnerHTML={{ __html: plan.description }}></span>
               <input type='checkbox' name={`name${plan.id}`} value={plan.id} onChange={handleClick} />
             </label>
-          ))}
+          )) }
           <div className='buttons'>
             <Link href='/dashboard/admin/1'>
               <a>Cancelar</a>
@@ -62,11 +61,10 @@ const Add = (data) => {
 }
 
 Add.getInitialProps = async (ctx) => {
-
-  const res = await axios.get(`${API_URI}admin/plan/user/${ctx.query.user_id}`)
-  .catch(err => console.log(err))
+  const res = await axios.get(`${ API_URI }admin/plan/user/${ ctx.query.user_id }`)
+    .catch(err => console.log(err))
   if (res) {
-    return {res: res.data}
+    return { res: res.data }
   }
   return {res: {}}
   

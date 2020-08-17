@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
+import ReCAPTCHA from 'react-google-recaptcha';
 import { UserContext } from 'context/UserContext'
 import { API_URI } from 'utils/variables'
 import Layout from 'components/Layout'
@@ -20,10 +21,16 @@ const Services = () => {
   const { login }             = useContext(UserContext)
   const [message, setMessage] = React.useState('')
   const [inputs, setInputs]   = React.useState({
-    email: '',
-    password: ''
-  });
+    'email': '',
+    'password': '',
+    'g-recaptcha-response': ''
+  })
 
+  function onChange(value) {
+    setInputs(prev => ({...prev, 'g-recaptcha-response': value}))
+    console.log("Captcha value:", value);
+  }
+  
   function handleChange(e) {
     const { name, value } = e.target;
     setInputs(inputs => ({ ...inputs, [name]: value }));
@@ -65,6 +72,10 @@ const Services = () => {
               }
               <input type='email' name='email' onChange={handleChange} placeholder='Ingresa tu email' />
               <input type='password' name='password' onChange={handleChange} placeholder='Ingresa tu contraseña' />
+              <ReCAPTCHA
+                sitekey="6LdTvr8ZAAAAAN5-_W2GG9WSgjCi9Nr0TZBZwdQy"
+                onChange={onChange}
+              />
               <ButtonBlue type='submit'>Iniciar sesión</ButtonBlue>
               <p>¿No tienes una cuenta? <Link href='/signup'><a>Crear cuenta</a></Link> </p>
             </Form>
