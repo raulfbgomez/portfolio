@@ -84,6 +84,7 @@ export const TextosStyle = Styled.div`
     padding: 10px 30px;
     text-decoration: none;
     animation: ${moveUp} 1s ease-in;
+    z-index: 2;
   }
   a:hover {
     background-color: #67a32b;
@@ -111,4 +112,5 @@ export const WaveStyle = Styled.div`
   position: absolute;
   bottom: -10px;
   left: 0;
+  z-index: 1;
 `

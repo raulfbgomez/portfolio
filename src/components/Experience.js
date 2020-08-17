@@ -1,9 +1,9 @@
 import { CardExperience, ExperienceStyle } from '../styles/Experience'
-import { Hr, Title } from '../styles/Components'
+import { Hr, TitleWhite } from '../styles/Components'
 
 const Experience = () => (
   <ExperienceStyle>
-    <Title>Experiencia</Title>
+    <TitleWhite>Experiencia</TitleWhite>
     <Hr />
     <CardExperience>
       <p className='card-date'>ACTUALMENTE</p>

@@ -19,7 +19,7 @@ export const CardExperience = Styled.div`
   }
   div.card-content {
     background: rgba(255, 255, 255, 0.9);
-    box-shadow: 5px 10px 8px #888888;
+    box-shadow: 5px 10px 8px #292929;
     flex: 1;
     padding: 15px 20px;
     h1 {

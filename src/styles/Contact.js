@@ -11,6 +11,8 @@ export const ContactContainer = Styled.div`
   p {
     color: #fff;
     text-align: center;
+    line-height: 1.5em;
+    font-size: 1.2em;
     a {
       color: ${props => props.theme.colors.secondary};
       text-decoration: none;

@@ -16,3 +16,9 @@ export const Title = Styled.h1`
   font-size: 2.4rem;
   text-align: center;
 `
+
+export const TitleWhite =Styled.h1`
+  color: #fff;
+  font-size: 2.4rem;
+  text-align: center;
+`
