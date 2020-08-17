@@ -23,7 +23,7 @@ class AuthController extends Controller
       if (empty($data['email']) || empty($data['password'])) {
         return ['message' => 'Favor de rellenar todos los campos.'];
       } else {
-        $secretKey = '6LdTvr8ZAAAAAGN-SIRUSW2EG38zeMA975p-DliK';
+        $secretKey = env('SECRET_KEY_CAPTCHA');
         $captcha   = $data['g-recaptcha-response'];
         // post request to server
         $url          = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
@@ -53,7 +53,7 @@ class AuthController extends Controller
       if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
         return ['message' => 'Favor de rellenar todos los campos.'];
       } else {
-        $secretKey = '6LdTvr8ZAAAAAGN-SIRUSW2EG38zeMA975p-DliK';
+        $secretKey = env('SECRET_KEY_CAPTCHA');
         $captcha   = $data['g-recaptcha-response'];
         // post request to server
         $url          = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
