@@ -9,6 +9,7 @@ import Layout from 'components/Layout'
 import Nav from 'components/Nav'
 import { 
   ButtonBlue,
+  Center,
   Container, 
   Form,
   Message, 
@@ -18,9 +19,10 @@ import {
 
 const Services = () => {
 
-  const { login }             = useContext(UserContext)
-  const [message, setMessage] = React.useState('')
-  const [inputs, setInputs]   = React.useState({
+  const { login }               = useContext(UserContext)
+  const [message, setMessage]   = React.useState('')
+  const [recovery, setRecovery] = React.useState(false)
+  const [inputs, setInputs]     = React.useState({
     'email': '',
     'password': '',
     'g-recaptcha-response': ''
@@ -50,6 +52,7 @@ const Services = () => {
           Router.push(`/home`)
         }
       }
+      setRecovery(true)
       setMessage(response.data.message)
     })
     .catch(err => {
@@ -77,7 +80,12 @@ const Services = () => {
                 onChange={onChange}
               />
               <ButtonBlue type='submit'>Iniciar sesión</ButtonBlue>
-              <p>¿No tienes una cuenta? <Link href='/signup'><a>Crear cuenta</a></Link> </p>
+              <Center>
+                <p>¿No tienes una cuenta? <Link href='/signup'><a>Crear cuenta</a></Link></p>
+                {recovery &&
+                  <p>¿Olvidaste tu contraseña? <Link href='/password-recovery'><a>Generar una nueva</a></Link></p>
+                }
+              </Center>
             </Form>
           </Container>
         </Wrapper>

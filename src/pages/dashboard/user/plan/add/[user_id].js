@@ -39,7 +39,7 @@ const Add = (data) => {
   return (
     <Layout title='Administración'>
       <Wrapper>
-        <Title>Agregar un nuevo plan para { data.res.user.name || '' }</Title>
+        <Title>Agregar un nuevo plan para { data.res.user && data.res.user.name }</Title>
         <FormBlock onSubmit={ handleSubmit }>
           { data.res && data.res.plans.map(plan => (
             <label key={ plan.id }>

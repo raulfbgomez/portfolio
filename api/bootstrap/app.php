@@ -27,6 +27,8 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
+$app->register(Illuminate\Mail\MailServiceProvider::class);
+
 $app->withFacades();
 
 $app->withEloquent();
@@ -62,6 +64,8 @@ $app->singleton(
 | the default version. You may register other files below as needed.
 |
 */
+
+$app->configure('mail');
 
 $app->configure('app');
 

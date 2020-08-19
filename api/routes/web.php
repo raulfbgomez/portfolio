@@ -18,6 +18,9 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'auth'], function () use ($router) {
    $router->post('/signin', 'AuthController@signin');
    $router->post('/signup', 'AuthController@signup');
+   $router->post('/password-recovery', 'AuthController@passwordRecovery');
+   $router->post('/verify-token', 'AuthController@verifyToken');
+   $router->post('/new-password', 'AuthController@newPassword');
 });
 
 $router->group(['prefix' => 'admin'], function () use ($router) {

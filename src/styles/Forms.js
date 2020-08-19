@@ -17,6 +17,12 @@ export const ButtonBlue = Styled.button`
     transform: translateY(-6px);
   }
 `
+
+export const Center = Styled.div`
+  text-align: center;
+  padding: 10px 0;
+`
+
 export const Container = Styled.div`
   background-color: #fff;
   border-radius: 15px;
@@ -52,7 +58,7 @@ export const Form = Styled.form`
     }
   }
   p {
-    margin-top: 20px;
+    margin: 10px 0; 
     a {
       color: ${ props => props.theme.colors.blue }
     }
